@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+	<ui:define name="pageTitle">E-Safra : Bus Manager Assign Buses To Line</ui:define>
+	<ui:define name="pageContent">
+		<h1>Assign Buses to Line</h1>
+		<h:form>
+			<!-- 	old -->
+			<!-- 		<h:selectOneMenu value="#{assignBusesLineBean.idSelectedLine}"> -->
+			<!-- 			<f:selectItems value="#{assignBusesLineBean.items}"></f:selectItems> -->
+			<!-- 		</h:selectOneMenu> -->
+			<!-- 	old -->
+
+			<!-- 	new -->
+			<h:selectOneMenu value="#{lineBean.line}" converter="lineConverter">
+				<f:selectItems value="#{lineBean.lines}" var="line"
+					itemValue="#{line}" itemLabel="#{line.name}" />
+			</h:selectOneMenu>
+			<!-- 	new -->
+
+			<!-- selectOneMenu prend en paramétre selectItems -->
+			<!-- fel managementBean naamel une méthode eli t3bi el selectItems -->
+			<!-- tekhou index eli houa l'id wel valye hya el name mathalan -->
+
+			<h:dataTable border="1" value="#{lineBean.buses}" var="bus">
+				<h:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{bus.number}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="#" />
+					</f:facet>
+					<h:selectBooleanCheckbox value="#{lineBean.checked[bus.id]}" />
+				</h:column>
+			</h:dataTable>
+			<br />
+			<h:commandButton value="submit"
+				action="#{lineBean.doAssignBusesLine}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

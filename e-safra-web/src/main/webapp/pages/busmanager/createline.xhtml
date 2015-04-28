@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+	<ui:define name="pageTitle">E-Safra : Bus Manager Create Line</ui:define>
+	<ui:define name="pageContent">
+		<h1>Create Line</h1>
+		<h:form>
+			<h:panelGrid column="1">
+				<h:outputText value="Line name : " />
+				<h:inputText value="#{lineBean.line.name}" />
+			</h:panelGrid>
+			<br />
+			<h:dataTable border="1" value="#{lineBean.stationsDataModel}"
+				var="station">
+				<h:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{station.name}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="#" />
+					</f:facet>
+					<h:commandButton action="#{lineBean.doSelectLineStation}"
+						value="select" />
+				</h:column>
+			</h:dataTable>
+			<br />
+			<h:commandButton action="#{lineBean.doCreateLine}" value="Create" />
+		</h:form>
+	</ui:define>
+</ui:composition>

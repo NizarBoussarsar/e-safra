@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+	<ui:define name="pageTitle">E-Safra : Home Page</ui:define>
+	<ui:define name="pageContent">
+		<h1>Home page</h1>
+		<br />
+		<h:panelGroup rendered="#{empty userSession.profile}"
+			id="socialButtons">
+			<h3>Empty</h3>
+		</h:panelGroup>
+		<h:panelGrid columns="3" rendered="#{not empty userSession.profile}">
+			<h:graphicImage
+				rendered="#{not empty userSession.profile.profileImageURL}"
+				value="#{userSession.profile.profileImageURL}" />
+			<br />
+			<h:outputText value="Hello, #{userSession.profile.fullName}" />
+			<br />
+			<h:commandButton value="Log out"
+				actionListener="#{userSession.logOut}" />
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>

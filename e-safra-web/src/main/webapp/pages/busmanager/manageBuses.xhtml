@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+	<ui:define name="pageTitle">E-Safra : Bus Manager Manage Buses</ui:define>
+	<ui:define name="pageContent">
+		<h:form>
+			<h:dataTable value="#{busBean.buses}" var="b" border="2">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="number" />
+					</f:facet>
+					<h:outputText value="#{b.number}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{b.number}" />
+					</f:facet>
+					<h:commandButton action="#{busBean.doSelect}" value="select">
+						<f:setPropertyActionListener value="#{b}" target="#{busBean.bus}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{busBean.doSelect}" value="add bus" />
+			<h:panelGrid columns="2" rendered="#{busBean.visibility}">
+				<h:outputText value="num" />
+				<h:inputText value="#{busBean.bus.number}" />
+				<h:outputText value="line" />
+				<h:inputText value="#{busBean.bus.line.name}" />
+				<h:outputText value="line to update" />
+				<h:selectOneMenu value="#{lineBean.line}" converter="lineConverter">
+					<f:selectItems value="#{lineBean.lines}" var="l"
+						itemLabel="#{l.name}" itemValue="#{l}"></f:selectItems>
+				</h:selectOneMenu>
+				<h:commandButton action="#{busBean.doSaveOrUpdate}"
+					value="save or update" />
+				<h:commandButton action="#{busBean.doDeleteBus}" value="delete" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
