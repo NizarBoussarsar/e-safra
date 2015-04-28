@@ -2,10 +2,14 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Entity implementation class for Entity: Passenger
@@ -20,7 +24,7 @@ public class Passenger extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	// private Ticket ticket;
+	private List<Ticket> tickets;
 
 	public Passenger() {
 		super();
@@ -50,22 +54,14 @@ public class Passenger extends User implements Serializable {
 		this.facebookId = facebookId;
 	}
 
-	// @OneToOne(mappedBy = "passenger")
-	// public Ticket getTicket() {
-	// return ticket;
-	// }
-	//
-	// public void setTicket(Ticket ticket) {
-	// this.ticket = ticket;
-	// }
+	@OneToMany(mappedBy = "passenger")
+	@JsonIgnore
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
 
-	@Override
-	public String toString() {
-		return "Passenger [getFirstName()=" + getFirstName()
-				+ ", getLastName()=" + getLastName() + ", getEmail()="
-				+ getEmail() + ", getGender()=" + getGender()
-				+ ", getBirthDay()=" + getBirthDay() + ", cash=" + cash
-				+ ", facebookId=" + facebookId + "]";
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }

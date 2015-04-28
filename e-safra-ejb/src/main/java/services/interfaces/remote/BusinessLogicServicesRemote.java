@@ -16,7 +16,7 @@ import domain.User;
 public interface BusinessLogicServicesRemote {
 
 	User identification(String email, String password);
-	
+
 	Boolean changePassword(User user, String oldPassword, String newPassword,
 			String confirmationPassword);
 
@@ -52,6 +52,10 @@ public interface BusinessLogicServicesRemote {
 
 	Line findLineByName(String name);
 
-	Boolean buyTicket(Passenger passenger, Bus bus, Double price);
+	Boolean buyTicket(Passenger passenger, Station departureStation,
+			Station arrivalStation, Bus bus, Double price);
+	
+	List<Bus> findComingSoonBusesGoingToStation(
+			String departureStationName, String arrivalStationName);
 
 }

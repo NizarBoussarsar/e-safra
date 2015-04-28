@@ -1,9 +1,13 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Entity implementation class for Entity: Ticket
@@ -12,14 +16,16 @@ import javax.persistence.Entity;
 @Entity
 public class Ticket implements Serializable {
 
-	private TicketId ticketId;
 	private Long number;
 	private Double price;
+	private Date date;
 
 	private static final long serialVersionUID = 1L;
 
-	// private Passenger passenger;
-	// private Bus bus;
+	private Passenger passenger;
+	private Station departureStation;
+	private Station arrivalStation;
+	private Bus bus;
 
 	// @Column(unique = true)
 
@@ -27,22 +33,19 @@ public class Ticket implements Serializable {
 		super();
 	}
 
-	public Ticket(TicketId ticketId, Double price, Long number) {
+	public Ticket(Double price, Date date, Passenger passenger,
+			Station departureStation, Station arrivalStation, Bus bus) {
 		super();
-		this.ticketId = ticketId;
 		this.price = price;
-		this.number = number;
+		this.date = date;
+		this.passenger = passenger;
+		this.departureStation = departureStation;
+		this.arrivalStation = arrivalStation;
+		this.bus = bus;
 	}
 
-	@EmbeddedId
-	public TicketId getTicketId() {
-		return ticketId;
-	}
-
-	public void setTicketId(TicketId ticketId) {
-		this.ticketId = ticketId;
-	}
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getNumber() {
 		return number;
 	}
@@ -59,53 +62,48 @@ public class Ticket implements Serializable {
 		this.price = price;
 	}
 
-	// @OneToOne
-	// public Passenger getPassenger() {
-	// return passenger;
-	// }
-	//
-	// public void setPassenger(Passenger passenger) {
-	// this.passenger = passenger;
-	// }
-	//
-	// @OneToOne
-	// public Bus getBus() {
-	// return bus;
-	// }
-	//
-	// public void setBus(Bus bus) {
-	// this.bus = bus;
-	// }
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+	public Date getDate() {
+		return date;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Ticket other = (Ticket) obj;
-		if (number == null) {
-			if (other.number != null)
-				return false;
-		} else if (!number.equals(other.number))
-			return false;
-		if (Double.doubleToLongBits(price) != Double
-				.doubleToLongBits(other.price))
-			return false;
-		return true;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	@ManyToOne
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+	}
+
+	@ManyToOne
+	public Station getDepartureStation() {
+		return departureStation;
+	}
+
+	public void setDepartureStation(Station departureStation) {
+		this.departureStation = departureStation;
+	}
+
+	@ManyToOne
+	public Station getArrivalStation() {
+		return arrivalStation;
+	}
+
+	public void setArrivalStation(Station arrivalStation) {
+		this.arrivalStation = arrivalStation;
+	}
+
+	@ManyToOne
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
 	}
 
 }

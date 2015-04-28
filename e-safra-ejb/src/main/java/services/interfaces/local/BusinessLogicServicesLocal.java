@@ -61,6 +61,10 @@ public interface BusinessLogicServicesLocal {
 
 	Line findLineByName(String name);
 
-	Boolean buyTicket(Passenger passenger, Bus bus, Double price);
+	Boolean buyTicket(Passenger passenger, Station departureStation,
+			Station arrivalStation, Bus bus, Double price);
+
+	List<Bus> findComingSoonBusesGoingToStation(String departureStationName,
+			String arrivalStationName);
 
 }

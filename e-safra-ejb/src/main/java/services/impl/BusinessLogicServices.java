@@ -1,6 +1,7 @@
 package services.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,6 @@ import domain.Passenger;
 import domain.Station;
 import domain.Stop;
 import domain.Ticket;
-import domain.TicketId;
 import domain.Type;
 import domain.User;
 
@@ -395,20 +395,20 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		return line;
 	}
 
-	private static Long number = 1L;
-
 	// Here we should find a solution to manage the case when two passengers buy
 	// different tickets at the same time
 	@Override
-	public Boolean buyTicket(Passenger passenger, Bus bus, Double price) {
+	public Boolean buyTicket(Passenger passenger, Station departureStation,
+			Station arrivalStation, Bus bus, Double price) {
 		Boolean b = false;
 		try {
 			entityManager.persist(passenger);
 			entityManager.persist(bus);
+			entityManager.persist(departureStation);
+			entityManager.persist(arrivalStation);
 			if (passenger.getCash() > price) {
-				Ticket ticket = new Ticket(new TicketId(passenger.getId(),
-						bus.getId()), price, number);
-				number++;
+				Ticket ticket = new Ticket(price, new Date(), passenger,
+						departureStation, arrivalStation, bus);
 				entityManager.persist(ticket);
 				b = true;
 			}
@@ -416,5 +416,28 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			e.printStackTrace();
 		}
 		return b;
+	}
+
+	@Override
+	public List<Bus> findComingSoonBusesGoingToStation(
+			String departureStationName, String arrivalStationName) {
+		List<Bus> busesComingToDepartureStation = findComingSoonBuses(departureStationName);
+		List<Bus> busesGoingToArrivalStation = new ArrayList<Bus>();
+		Boolean b = false;
+		for (Bus bus : busesComingToDepartureStation) {
+			Line line = bus.getLine();
+			List<Type> types = line.getTypes();
+			for (Type type : types) {
+				if (type.getStationType() == "Arrival Terminal"
+						|| type.getStationType() == "Intermediate Station"
+						&& type.getStation().getName() == arrivalStationName) {
+					b = true;
+				}
+			}
+			if (b) {
+				busesGoingToArrivalStation.add(bus);
+			}
+		}
+		return busesGoingToArrivalStation;
 	}
 }

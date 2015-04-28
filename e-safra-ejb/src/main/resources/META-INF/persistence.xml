@@ -14,7 +14,6 @@
 		<class>domain.Stop</class>
 		<class>domain.StopId</class>
 		<class>domain.Ticket</class>
-		<class>domain.TicketId</class>
 		<class>domain.Type</class>
 		<class>domain.TypeId</class>
 		<properties>
