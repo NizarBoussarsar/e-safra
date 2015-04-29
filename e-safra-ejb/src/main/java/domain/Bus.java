@@ -30,22 +30,6 @@ public class Bus implements Serializable {
 	private Driver driver;
 	private List<Ticket> tickets;
 
-	// The Bus has a list of Passengers so the Driver can know the identity of
-	// each Passenger and so when the Passenger buy a Ticket the number of free
-	// places in a Bus will decrement and increment again when he leaves it
-
-	// private List<Passenger> passengers;
-
-	// @OneToMany(mappedBy = "bus")
-	// @JsonIgnore
-	// public List<Passenger> getPassengers() {
-	// return passengers;
-	// }
-
-	// public void setPassengers(List<Passenger> passengers) {
-	// this.passengers = passengers;
-	// }
-
 	public Bus() {
 		super();
 	}
@@ -110,6 +94,68 @@ public class Bus implements Serializable {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((driver == null) ? 0 : driver.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((line == null) ? 0 : line.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result + ((stops == null) ? 0 : stops.hashCode());
+		result = prime * result + ((tickets == null) ? 0 : tickets.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bus other = (Bus) obj;
+		if (driver == null) {
+			if (other.driver != null)
+				return false;
+		} else if (!driver.equals(other.driver))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (line == null) {
+			if (other.line != null)
+				return false;
+		} else if (!line.equals(other.line))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		if (stops == null) {
+			if (other.stops != null)
+				return false;
+		} else if (!stops.equals(other.stops))
+			return false;
+		if (tickets == null) {
+			if (other.tickets != null)
+				return false;
+		} else if (!tickets.equals(other.tickets))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Bus [id=" + id + ", number=" + number + ", stops=" + stops
+				+ ", line=" + line + ", driver=" + driver + ", tickets="
+				+ tickets + "]";
 	}
 
 }

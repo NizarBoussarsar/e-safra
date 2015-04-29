@@ -56,8 +56,8 @@ public class UserBean {
 			String homeURL = "http://localhost:8483/esafra-local/pages/public/index.jsf";
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect(homeURL);
-		} catch (IOException ex) {
-			System.out.println(ex.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

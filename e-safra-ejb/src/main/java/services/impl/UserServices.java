@@ -35,7 +35,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			entityManager.persist(user);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -48,7 +48,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			entityManager.remove(entityManager.merge(user));
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -62,7 +62,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			entityManager.remove(user);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -75,7 +75,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			entityManager.merge(user);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -86,7 +86,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		try {
 			return entityManager.find(User.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}
@@ -100,7 +100,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			Query query = entityManager.createQuery(jpql);
 			users = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return users;

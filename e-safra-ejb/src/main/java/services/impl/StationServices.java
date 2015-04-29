@@ -36,7 +36,7 @@ public class StationServices implements StationServicesRemote,
 			entityManager.persist(station);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -49,7 +49,7 @@ public class StationServices implements StationServicesRemote,
 			entityManager.remove(entityManager.merge(station));
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -63,7 +63,7 @@ public class StationServices implements StationServicesRemote,
 			entityManager.remove(station);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -76,7 +76,7 @@ public class StationServices implements StationServicesRemote,
 			entityManager.merge(station);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -87,7 +87,7 @@ public class StationServices implements StationServicesRemote,
 		try {
 			return entityManager.find(Station.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 		}
 		return null;
 	}
@@ -101,7 +101,7 @@ public class StationServices implements StationServicesRemote,
 			Query query = entityManager.createQuery(jpql);
 			stations = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return stations;

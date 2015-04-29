@@ -35,7 +35,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 			entityManager.persist(bus);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -48,7 +48,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 			entityManager.remove(entityManager.merge(bus));
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -62,7 +62,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 			entityManager.remove(Bus);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -75,7 +75,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 			entityManager.merge(bus);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -86,7 +86,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 		try {
 			return entityManager.find(Bus.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}
@@ -100,7 +100,7 @@ public class BusServices implements BusServicesRemote, BusServicesLocal {
 			Query query = entityManager.createQuery(jpql);
 			buses = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return buses;

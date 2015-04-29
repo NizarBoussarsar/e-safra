@@ -36,7 +36,7 @@ public class TicketServices implements TicketServicesLocal,
 			entityManager.persist(ticket);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -49,7 +49,7 @@ public class TicketServices implements TicketServicesLocal,
 			entityManager.remove(entityManager.merge(ticket));
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -63,7 +63,7 @@ public class TicketServices implements TicketServicesLocal,
 			entityManager.remove(ticket);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -76,7 +76,7 @@ public class TicketServices implements TicketServicesLocal,
 			entityManager.merge(ticket);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -87,7 +87,7 @@ public class TicketServices implements TicketServicesLocal,
 		try {
 			return entityManager.find(Ticket.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 		}
 		return null;
 	}
@@ -101,7 +101,7 @@ public class TicketServices implements TicketServicesLocal,
 			Query query = entityManager.createQuery(jpql);
 			tickets = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return tickets;

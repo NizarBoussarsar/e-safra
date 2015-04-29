@@ -64,4 +64,51 @@ public class Passenger extends User implements Serializable {
 		this.tickets = tickets;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((cash == null) ? 0 : cash.hashCode());
+		result = prime * result
+				+ ((facebookId == null) ? 0 : facebookId.hashCode());
+		result = prime * result + ((tickets == null) ? 0 : tickets.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Passenger other = (Passenger) obj;
+		if (cash == null) {
+			if (other.cash != null)
+				return false;
+		} else if (!cash.equals(other.cash))
+			return false;
+		if (facebookId == null) {
+			if (other.facebookId != null)
+				return false;
+		} else if (!facebookId.equals(other.facebookId))
+			return false;
+		if (tickets == null) {
+			if (other.tickets != null)
+				return false;
+		} else if (!tickets.equals(other.tickets))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Passenger [getFirstName()=" + getFirstName()
+				+ ", getLastName()=" + getLastName() + ", getEmail()="
+				+ getEmail() + ", getGender()=" + getGender()
+				+ ", getBirthDay()=" + getBirthDay() + ", cash=" + cash
+				+ ", facebookId=" + facebookId + "]";
+	}
+
 }

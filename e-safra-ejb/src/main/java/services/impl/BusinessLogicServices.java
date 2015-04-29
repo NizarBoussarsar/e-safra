@@ -65,7 +65,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("y", password);
 			return (User) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -84,7 +84,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return b;
 	}
@@ -150,7 +150,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	// }
 	// return null;
 	// } catch (Exception e) {
-	// e.printStackTrace();
+	// System.out.println(e.getMessage());
 	// return null;
 	// }
 	// }
@@ -175,7 +175,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			b = true;
 			return b;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -192,7 +192,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			}
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return b;
@@ -208,7 +208,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			entityManager.persist(stop);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return b;
 	}
@@ -227,7 +227,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("x", line);
 			stations = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return stations;
@@ -247,7 +247,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("x", station);
 			lines = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return lines;
@@ -264,7 +264,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("param1", line);
 			buses = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return buses;
@@ -278,7 +278,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			Query query = entityManager.createQuery(jpql);
 			buses = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return buses;
@@ -291,7 +291,6 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		List<Line> lines = findLinesByStationId(station.getId());
 		for (Line line : lines) {
 			List<Bus> buses = findBusesByLineId(line.getId());
-			System.out.println(line + "" + buses);
 			for (Bus b : buses) {
 				Stop lastOne = findLastStopByBusId(b.getId());
 				if (lastOne != null) {
@@ -300,10 +299,6 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 							lastStation.getId(), line.getId());
 					Integer thisStationOrder = findStationOrderByLineId(
 							station.getId(), line.getId());
-					System.out.println(b + " last stop "
-							+ lastOne.getStation().getName() + " this order"
-							+ thisStationOrder + " last order"
-							+ lastStationOrder);
 					if (thisStationOrder != null && lastStationOrder != null
 							&& lastStationOrder < thisStationOrder) {
 						comingSoonBuses.add(b);
@@ -327,7 +322,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				stop = stops.get(0);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return stop;
@@ -344,7 +339,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("param2", idLine);
 			order = query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return order;
@@ -359,7 +354,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("param1", number);
 			bus = (Bus) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return bus;
@@ -374,7 +369,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("param1", name);
 			station = (Station) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return station;
@@ -389,7 +384,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			query.setParameter("param1", name);
 			line = (Line) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return line;
@@ -402,18 +397,34 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			Station arrivalStation, Bus bus, Double price) {
 		Boolean b = false;
 		try {
-			entityManager.persist(passenger);
-			entityManager.persist(bus);
-			entityManager.persist(departureStation);
-			entityManager.persist(arrivalStation);
-			if (passenger.getCash() > price) {
-				Ticket ticket = new Ticket(price, new Date(), passenger,
-						departureStation, arrivalStation, bus);
-				entityManager.persist(ticket);
-				b = true;
+			entityManager.merge(bus);
+			entityManager.merge(departureStation);
+			entityManager.merge(arrivalStation);
+			entityManager.merge(passenger);
+			if (bus != null && departureStation != null
+					&& arrivalStation != null && passenger != null) {
+				if (passenger.getCash() > price) {
+					passenger.setCash(passenger.getCash() - price);
+					Ticket ticket = new Ticket(price, new Date(), passenger,
+							departureStation, arrivalStation, bus);
+					entityManager.persist(passenger);
+					entityManager.persist(ticket);
+					// Here we should reduce the number of free places in
+					// this bus
+
+					// Also we should think about synchronizing the ticket
+					// buy procedure
+					System.out.println("Ticket sold ! Your ticket number is : "
+							+ ticket.getNumber());
+					System.out.println("Your remaining cash is : "
+							+ passenger.getCash());
+					b = true;
+				} else {
+					System.out.println("You don't have enough cash !");
+				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return b;
 	}
@@ -421,21 +432,19 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	@Override
 	public List<Bus> findComingSoonBusesGoingToStation(
 			String departureStationName, String arrivalStationName) {
+		String arrivalTerminal = "Arrival Terminal";
+		String intermideteStation = "Intermediate Station";
 		List<Bus> busesComingToDepartureStation = findComingSoonBuses(departureStationName);
 		List<Bus> busesGoingToArrivalStation = new ArrayList<Bus>();
-		Boolean b = false;
 		for (Bus bus : busesComingToDepartureStation) {
-			Line line = bus.getLine();
-			List<Type> types = line.getTypes();
+			List<Type> types = bus.getLine().getTypes();
 			for (Type type : types) {
-				if (type.getStationType() == "Arrival Terminal"
-						|| type.getStationType() == "Intermediate Station"
-						&& type.getStation().getName() == arrivalStationName) {
-					b = true;
+				if ((type.getStationType().equals(arrivalTerminal) || type
+						.getStationType().equals(intermideteStation))
+						&& type.getStation().getName()
+								.equals(arrivalStationName)) {
+					busesGoingToArrivalStation.add(bus);
 				}
-			}
-			if (b) {
-				busesGoingToArrivalStation.add(bus);
 			}
 		}
 		return busesGoingToArrivalStation;

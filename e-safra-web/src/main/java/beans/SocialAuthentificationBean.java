@@ -50,8 +50,7 @@ public class SocialAuthentificationBean implements Serializable {
 					.redirect(authenticationURL);
 
 		} catch (Exception e) {
-			System.out.println("Connect Exception ... ");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -84,9 +83,8 @@ public class SocialAuthentificationBean implements Serializable {
 						.redirect(homeURL);
 			}
 
-		} catch (Exception ex) {
-			System.out.println("UserSession - Exception: ");
-			ex.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -115,9 +113,8 @@ public class SocialAuthentificationBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect(homeURL);
 
-		} catch (IOException ex) {
-			System.out.println("UserSessionBean - IOException: "
-					+ ex.toString());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

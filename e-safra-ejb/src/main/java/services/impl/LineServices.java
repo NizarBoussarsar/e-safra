@@ -35,7 +35,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.persist(line);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -48,7 +48,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.remove(entityManager.merge(line));
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -63,7 +63,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			b = true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -76,7 +76,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.merge(line);
 			b = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return b;
@@ -87,7 +87,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 		try {
 			return entityManager.find(Line.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 		}
 		return null;
 	}
@@ -101,7 +101,7 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			Query query = entityManager.createQuery(jpql);
 			Lines = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 			return null;
 		}
 		return Lines;

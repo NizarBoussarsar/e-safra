@@ -22,7 +22,7 @@ import domain.Passenger;
 import domain.Station;
 
 /**
- * Session Bean implementation class DBPopulation
+ * Session Bean implementation class DatabaseServices
  */
 @Singleton
 @Startup
@@ -51,6 +51,11 @@ public class DatabaseServices {
 					new SimpleDateFormat("MM/dd/yyyy").parse("01/02/1991"),
 					"mohamedamine.trabelsi@esprit.tn", "esprit", 5, "00:00 PM");
 			entityManager.persist(driver2);
+
+			Driver driver3 = new Driver("Firas", "Turki", 'M',
+					new SimpleDateFormat("MM/dd/yyyy").parse("24/07/1992"),
+					"firas.turku@esprit.tn", "esprit", 5, "04:00 PM");
+			entityManager.persist(driver3);
 
 			Passenger passenger1 = new Passenger("Nizar", "Boussarsar", 'M',
 					new SimpleDateFormat("MM/dd/yyyy").parse("02/16/1991"),
@@ -117,24 +122,24 @@ public class DatabaseServices {
 			Bus bus16 = new Bus("B16");
 			entityManager.persist(bus16);
 
-			Station station1 = new Station("Marsa");
-			entityManager.persist(station1);
-			Station station2 = new Station("Sidi Daoud");
-			entityManager.persist(station2);
-			Station station3 = new Station("La Goulette");
-			entityManager.persist(station3);
-			Station station4 = new Station("Rades");
-			entityManager.persist(station4);
-			Station station5 = new Station("Megrine");
-			entityManager.persist(station5);
-			Station station6 = new Station("Ain Zaghouan");
-			entityManager.persist(station6);
-			Station station7 = new Station("Les berges du lac");
-			entityManager.persist(station7);
-			Station station8 = new Station("Charguia");
-			entityManager.persist(station8);
-			Station station9 = new Station("Borj Louzir");
-			entityManager.persist(station9);
+			Station marsa = new Station("Marsa");
+			entityManager.persist(marsa);
+			Station sidi_daoud = new Station("Sidi Daoud");
+			entityManager.persist(sidi_daoud);
+			Station la_goulette = new Station("La Goulette");
+			entityManager.persist(la_goulette);
+			Station rades = new Station("Rades");
+			entityManager.persist(rades);
+			Station megrine = new Station("Megrine");
+			entityManager.persist(megrine);
+			Station ain_zaghouan = new Station("Ain Zaghouan");
+			entityManager.persist(ain_zaghouan);
+			Station les_berges_du_lac = new Station("Les berges du lac");
+			entityManager.persist(les_berges_du_lac);
+			Station charguia = new Station("Charguia");
+			entityManager.persist(charguia);
+			Station borj_louzir = new Station("Borj Louzir");
+			entityManager.persist(borj_louzir);
 
 			List<Bus> listBuses1 = new ArrayList<>();
 			listBuses1.add(bus1);
@@ -148,92 +153,99 @@ public class DatabaseServices {
 			List<Bus> listBuses4 = new ArrayList<>();
 			listBuses4.add(bus7);
 			listBuses4.add(bus8);
+			List<Bus> listBuses5 = new ArrayList<>();
+			listBuses5.add(bus9);
+			listBuses5.add(bus10);
 
-			Line line1 = new Line("Marsa - Megrine");
-			line1.linkBusesToThisLine(listBuses1);
-			entityManager.persist(line1);
+			Line marsaTOmegrine = new Line("Marsa - Megrine");
+			marsaTOmegrine.linkBusesToThisLine(listBuses1);
+			entityManager.persist(marsaTOmegrine);
 
-			Line line2 = new Line("Marsa - Borj Louzir");
-			line2.linkBusesToThisLine(listBuses2);
-			entityManager.persist(line2);
+			Line marsaTOborj_louzir = new Line("Marsa - Borj Louzir");
+			marsaTOborj_louzir.linkBusesToThisLine(listBuses2);
+			entityManager.persist(marsaTOborj_louzir);
 
-			Line line3 = new Line("Megrine - Marsa");
-			line3.linkBusesToThisLine(listBuses3);
-			entityManager.persist(line3);
+			Line megrineTOmarsa = new Line("Megrine - Marsa");
+			megrineTOmarsa.linkBusesToThisLine(listBuses3);
+			entityManager.persist(megrineTOmarsa);
 
-			Line line4 = new Line("Borj Louzir - Sidi Daoud");
-			line4.linkBusesToThisLine(listBuses4);
-			entityManager.persist(line4);
+			Line borj_louzirTOsidi_daoud = new Line("Borj Louzir - Sidi Daoud");
+			borj_louzirTOsidi_daoud.linkBusesToThisLine(listBuses4);
+			entityManager.persist(borj_louzirTOsidi_daoud);
 
-			Line line5 = new Line("Charguia - Marsa");
-			line5.linkBusesToThisLine(listBuses4);
-			entityManager.persist(line5);
+			Line charguiaTOmarsa = new Line("Charguia - Marsa");
+			charguiaTOmarsa.linkBusesToThisLine(listBuses5);
+			entityManager.persist(charguiaTOmarsa);
 
 			// Link some specific stations to a specific line
 			Map<Integer, Station> stations1 = new HashMap<>();
-			stations1.put(0, station1); // Marsa
-			stations1.put(1, station2); // Sidi Daoud
-			stations1.put(2, station3); // La Goulette
-			stations1.put(3, station4); // Rades
-			stations1.put(4, station5); // Megrin
-			businessLogicServicesLocal.setLineStations(line1, stations1);
+			stations1.put(0, marsa);
+			stations1.put(1, sidi_daoud);
+			stations1.put(2, la_goulette);
+			stations1.put(3, rades);
+			stations1.put(4, megrine);
+			businessLogicServicesLocal.setLineStations(marsaTOmegrine,
+					stations1);
 
-			// Link some specific stations to a specific line
 			Map<Integer, Station> stations2 = new HashMap<>();
-			stations2.put(0, station1); // Marsa
-			stations2.put(1, station6); // Ain Zaghouan
-			stations2.put(2, station7); // Les berges du lac
-			stations2.put(3, station8); // Charguia
-			stations2.put(4, station9); // Borj Louzir
-			businessLogicServicesLocal.setLineStations(line2, stations2);
+			stations2.put(0, marsa);
+			stations2.put(1, ain_zaghouan);
+			stations2.put(2, les_berges_du_lac);
+			stations2.put(3, charguia);
+			stations2.put(4, borj_louzir);
+			businessLogicServicesLocal.setLineStations(marsaTOborj_louzir,
+					stations2);
 
-			// Link some specific stations to a specific line
 			Map<Integer, Station> stations3 = new HashMap<>();
-			stations3.put(0, station5); // Megrin
-			stations3.put(1, station4); // Rades
-			stations3.put(2, station7); // Les berges du lac
-			stations3.put(3, station3); // La Goulette
-			stations3.put(4, station2); // Sidi Daoud
-			stations3.put(5, station1); // Marsa
-			businessLogicServicesLocal.setLineStations(line3, stations3);
+			stations3.put(0, megrine);
+			stations3.put(1, rades);
+			stations3.put(2, les_berges_du_lac);
+			stations3.put(3, la_goulette);
+			stations3.put(4, sidi_daoud);
+			stations3.put(5, marsa);
+			businessLogicServicesLocal.setLineStations(megrineTOmarsa,
+					stations3);
 
-			// Link some specific stations to a specific line
 			Map<Integer, Station> stations4 = new HashMap<>();
-			stations4.put(0, station9); // Borj Louzir
-			stations4.put(1, station8); // Charguia
-			stations4.put(2, station7); // Les berges du lac
-			stations4.put(3, station6); // Ain Zaghouan
-			stations4.put(4, station1); // Marsa
-			stations4.put(5, station2); // Sidi Daoud
-			businessLogicServicesLocal.setLineStations(line4, stations4);
+			stations4.put(0, borj_louzir);
+			stations4.put(1, charguia);
+			stations4.put(2, les_berges_du_lac);
+			stations4.put(3, ain_zaghouan);
+			stations4.put(4, marsa);
+			stations4.put(5, sidi_daoud);
+			businessLogicServicesLocal.setLineStations(borj_louzirTOsidi_daoud,
+					stations4);
 
-			// Link some specific stations to a specific line
 			Map<Integer, Station> stations5 = new HashMap<>();
-			stations5.put(0, station8); // Charguia
-			stations5.put(1, station7); // Les berges du lac
-			stations5.put(2, station6); // Ain Zaghouan
-			stations5.put(3, station1); // Marsa
-			businessLogicServicesLocal.setLineStations(line5, stations5);
+			stations5.put(0, charguia);
+			stations5.put(1, les_berges_du_lac);
+			stations5.put(2, ain_zaghouan);
+			stations5.put(3, marsa);
+			businessLogicServicesLocal.setLineStations(charguiaTOmarsa,
+					stations5);
 
 			// Create a ticket and assign it to a passenger
-			businessLogicServicesLocal.buyTicket(passenger2, station1,
-					station2, bus1, 1.1D);
-			businessLogicServicesLocal.buyTicket(passenger2, station1,
-					station3, bus1, 1.2D);
-			businessLogicServicesLocal.buyTicket(passenger2, station1,
-					station4, bus1, 1.3D);
-			businessLogicServicesLocal.buyTicket(passenger2, station1,
-					station5, bus2, 1.4D);
+			businessLogicServicesLocal.buyTicket(passenger2, marsa, sidi_daoud,
+					bus1, 1.1D);
+			businessLogicServicesLocal.buyTicket(passenger2, marsa,
+					la_goulette, bus1, 1.2D);
+			businessLogicServicesLocal.buyTicket(passenger2, marsa, rades,
+					bus1, 1.3D);
+			businessLogicServicesLocal.buyTicket(passenger2, marsa, megrine,
+					bus2, 1.4D);
 
 			// Report some bus stops
-			businessLogicServicesLocal.reportBusStop(0, bus3, station4);
-			businessLogicServicesLocal.reportBusStop(1, bus1, station1);
-			businessLogicServicesLocal.reportBusStop(2, bus2, station1);
-			businessLogicServicesLocal.reportBusStop(3, bus1, station2);
-			businessLogicServicesLocal.reportBusStop(4, bus2, station2);
-			businessLogicServicesLocal.reportBusStop(0, bus2, station3);
+			businessLogicServicesLocal.reportBusStop(2, bus3, ain_zaghouan);
+			businessLogicServicesLocal.reportBusStop(0, bus5, rades);
+			businessLogicServicesLocal.reportBusStop(1, bus7, charguia);
+
+			// Assign driver to bus
+			bus3.setDriver(driver1);
+			bus5.setDriver(driver2);
+			bus7.setDriver(driver3);
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}

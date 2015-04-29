@@ -12,7 +12,7 @@ import domain.Bus;
 public class TestFindComingSoonBuses {
 
 	public static void main(String[] args) throws NamingException {
-		String stationName = "Rades";
+		String stationName = "Les berges du lac";
 
 		Context context = new InitialContext();
 
@@ -25,7 +25,6 @@ public class TestFindComingSoonBuses {
 		if (buses.size() > 0) {
 			System.out.println("There are " + buses.size()
 					+ " buses that will pass by " + stationName + " soon !");
-
 			for (Bus bus : buses) {
 				System.out.println("Bus number : " + bus.getNumber());
 			}
