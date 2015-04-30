@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import beans.LineBean;
-import domain.Line;
+import beans.StationBean;
+import domain.Station;
 
 @FacesConverter("stationConverter")
 public class StationConverter implements Converter {
@@ -17,19 +17,20 @@ public class StationConverter implements Converter {
 		if (value == null) {
 			return null;
 		}
-		LineBean lineBean = context.getApplication().evaluateExpressionGet(
-				context, "#{stationBean}", LineBean.class);
-		Line line = lineBean.doFindLineByName(value);
-		System.out.println(line);
-		return line;
+		StationBean stationBean = context.getApplication()
+				.evaluateExpressionGet(context, "#{stationBean}",
+						StationBean.class);
+		Station station = stationBean.doFindStationByName(value);
+		System.out.println(station);
+		return station;
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
 			Object object) {
 		String string = null;
-		if (object instanceof Line) {
-			string = ((Line) object).getName();
+		if (object instanceof Station) {
+			string = ((Station) object).getName();
 		}
 		return string;
 	}

@@ -6,5 +6,18 @@
 	<ui:define name="pageTitle">E-Safra : Passenger Home</ui:define>
 	<ui:define name="pageContent">
 		<h1>Passenger Home Page</h1>
+		<label>Please select your travel:</label><br/>
+		<h:selectOneMenu value="#{stationBean.station}"
+			converter="stationConverter">
+			<f:selectItems value="#{stationBean.stations}" var="station"
+				itemValue="staion" itemLabel="#{station.name}" />
+		</h:selectOneMenu>
+	Destination:
+		<h:selectOneMenu value="#{stationBean.station}"
+			converter="stationConverter">
+			<f:selectItems value="#{stationBean.stations}" var="station"
+				itemValue="staion" itemLabel="#{station.name}" />
+		</h:selectOneMenu>
+		
 	</ui:define>
 </ui:composition>

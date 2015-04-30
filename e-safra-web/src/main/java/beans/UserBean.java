@@ -12,6 +12,7 @@ import services.interfaces.local.BusinessLogicServicesLocal;
 import domain.BusManager;
 import domain.Driver;
 import domain.Passenger;
+import domain.Station;
 import domain.User;
 
 @ManagedBean
@@ -60,7 +61,9 @@ public class UserBean {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	public Station doFindUserByName(String name) {
+		return businessLogicServicesLocal.findStationByName(name);
+	}
 	public User getUser() {
 		return user;
 	}
