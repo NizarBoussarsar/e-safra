@@ -21,7 +21,7 @@ public class StationConverter implements Converter {
 				.evaluateExpressionGet(context, "#{stationBean}",
 						StationBean.class);
 		Station station = stationBean.doFindStationByName(value);
-		System.out.println(station);
+		System.out.println("Station="+station);
 		return station;
 	}
 

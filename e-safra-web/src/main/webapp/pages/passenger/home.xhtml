@@ -2,22 +2,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
 	<ui:define name="pageTitle">E-Safra : Passenger Home</ui:define>
 	<ui:define name="pageContent">
 		<h1>Passenger Home Page</h1>
-		<label>Please select your travel:</label><br/>
-		<h:selectOneMenu value="#{stationBean.station}"
-			converter="stationConverter">
-			<f:selectItems value="#{stationBean.stations}" var="station"
-				itemValue="staion" itemLabel="#{station.name}" />
-		</h:selectOneMenu>
+		<h:form>
+			<label>Please select your travel:</label>
+			<br />
+			<h:selectOneMenu value="#{ticketBean.stationDeparture}"
+				converter="stationConverter">
+				<f:selectItems value="#{ticketBean.stations}" var="station"
+					itemValue="#{station}" itemLabel="#{station.name}" />
+			</h:selectOneMenu>
 	Destination:
-		<h:selectOneMenu value="#{stationBean.station}"
-			converter="stationConverter">
-			<f:selectItems value="#{stationBean.stations}" var="station"
-				itemValue="staion" itemLabel="#{station.name}" />
-		</h:selectOneMenu>
-		
+		<h:selectOneMenu value="#{ticketBean.stationArrival}"
+				converter="stationConverter">
+				<f:selectItems value="#{ticketBean.stations}" var="station"
+					itemValue="#{station}" itemLabel="#{station.name}" />
+			</h:selectOneMenu>
+			<br />
+		Date:
+		<p:calendar value="#{ticketBean.date1}" pattern="MM/dd/yyyy HH:mm:ss" />
+			<h:commandButton value="submit" action="#{ticketBean.doSearchBus}" />
+		</h:form>
+
 	</ui:define>
 </ui:composition>

@@ -122,8 +122,7 @@ public class Station implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Station [id=" + id + ", name=" + name + ", stops=" + stops
-				+ ", types=" + types + "]";
+		return "Station [id=" + id + ", name=" + name + "]";
 	}
 
 	// @OneToMany

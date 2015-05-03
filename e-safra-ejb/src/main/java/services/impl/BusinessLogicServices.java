@@ -413,14 +413,14 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 					// this bus
 
 					// Also we should think about synchronizing the ticket
-					// buy procedure
-					System.out.println("Ticket sold ! Your ticket number is : "
-							+ ticket.getNumber());
-					System.out.println("Your remaining cash is : "
-							+ passenger.getCash());
+					// // buy procedure
+					// System.out.println("Ticket sold ! Your ticket number is : "
+					// + ticket.getNumber());
+					// System.out.println("Your remaining cash is : "
+					// + passenger.getCash());
 					b = true;
 				} else {
-					System.out.println("You don't have enough cash !");
+					// System.out.println("You don't have enough cash !");
 				}
 			}
 		} catch (Exception e) {
