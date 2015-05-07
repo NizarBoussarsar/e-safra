@@ -21,7 +21,7 @@ public class Driver extends User implements Serializable {
 
 	private Integer seniority;
 	private String shift;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private List<Bus> buses;
@@ -62,6 +62,38 @@ public class Driver extends User implements Serializable {
 
 	public void setBuses(List<Bus> buses) {
 		this.buses = buses;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((seniority == null) ? 0 : seniority.hashCode());
+		result = prime * result + ((shift == null) ? 0 : shift.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Driver other = (Driver) obj;
+		if (seniority == null) {
+			if (other.seniority != null)
+				return false;
+		} else if (!seniority.equals(other.seniority))
+			return false;
+		if (shift == null) {
+			if (other.shift != null)
+				return false;
+		} else if (!shift.equals(other.shift))
+			return false;
+		return true;
 	}
 
 	@Override

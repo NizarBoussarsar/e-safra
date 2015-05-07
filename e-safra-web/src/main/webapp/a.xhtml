@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h1>Passenger Home Page</h1>
+	<h:form>
+		<label>Please select your travel:</label>
+		<br />
+		<h:selectOneMenu value="#{stationBean.stationDeparture}"
+			converter="stationConverter">
+			<f:selectItems value="#{stationBean.stations}" var="sta"
+				itemValue="#{sta}" itemLabel="#{sta.name}" />
+		</h:selectOneMenu>
+	Destination:
+		<h:selectOneMenu value="#{stationBean.stationArrival}"
+			converter="stationConverter">
+			<f:selectItems value="#{stationBean.stations2}" var="st"
+				itemValue="#{st}" itemLabel="#{st.name}" />
+		</h:selectOneMenu>
+		<h:inputText value="date" >
+		<f:convertDateTime pattern="dd/MM/yyyy "/>
+		</h:inputText>
+		<br />
+		Date:
+		<p:calendar value="#{stationBean.date1}" pattern="MM/dd/yyyy HH:mm:ss" />
+		<h:commandButton value="submit" action="#{stationBean.doSearchBus}" />
+	</h:form>
+</body>
+</html>

@@ -11,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import services.interfaces.local.BusinessLogicServicesLocal;
 import services.interfaces.local.StationServicesLocal;
 import services.interfaces.local.TicketServicesLocal;
-import domain.Bus;
 import domain.Station;
 import domain.Ticket;
 
@@ -20,6 +19,7 @@ import domain.Ticket;
 public class TicketBean {
 	private Date date1;
 	private List<Station> stations = new ArrayList<>();
+	private List<Station> stations2 = new ArrayList<>();
 
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
@@ -36,10 +36,15 @@ public class TicketBean {
 
 	public String doSearchBus() {
 		System.out.println("Hello");
-		List<Bus> buses = businessLogicServicesLocal
-				.findComingSoonBusesGoingToStation(stationDeparture.getName(),
-						stationArrival.getName());
-		System.out.println("size : " + buses.size());
+		// List<Bus> buses = businessLogicServicesLocal
+		// .findComingSoonBusesGoingToStation(stationDeparture.getName(),
+		// stationArrival.getName());
+		// System.out.println("size : " + buses.size());
+		Station station1 = stationDeparture;
+		Station station2 = stationArrival;
+		System.out.println("affichage=" + station1);
+		System.out.println("affichage=" + station2);
+
 		return "";
 
 	}
@@ -91,6 +96,15 @@ public class TicketBean {
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+	public List<Station> getStations2() {
+		stations2 = stationServicesLocal.findAllStations();
+		return stations2;
+	}
+
+	public void setStations2(List<Station> stations2) {
+		this.stations2 = stations2;
 	}
 
 }

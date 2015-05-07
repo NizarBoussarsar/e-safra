@@ -9,21 +9,39 @@
 		<h:form>
 			<label>Please select your travel:</label>
 			<br />
-			<h:selectOneMenu value="#{ticketBean.stationDeparture}"
+			<h:selectOneMenu value="#{stationBean.stationDeparture}"
 				converter="stationConverter">
-				<f:selectItems value="#{ticketBean.stations}" var="station"
-					itemValue="#{station}" itemLabel="#{station.name}" />
+				<f:selectItems value="#{stationBean.stations}" var="sta"
+					itemValue="#{sta}" itemLabel="#{sta.name}" />
 			</h:selectOneMenu>
 	Destination:
-		<h:selectOneMenu value="#{ticketBean.stationArrival}"
+		<h:selectOneMenu value="#{stationBean.stationArrival}"
 				converter="stationConverter">
-				<f:selectItems value="#{ticketBean.stations}" var="station"
-					itemValue="#{station}" itemLabel="#{station.name}" />
+				<f:selectItems value="#{stationBean.stations2}" var="st"
+					itemValue="#{st}" itemLabel="#{st.name}" />
 			</h:selectOneMenu>
 			<br />
 		Date:
-		<p:calendar value="#{ticketBean.date1}" pattern="MM/dd/yyyy HH:mm:ss" />
-			<h:commandButton value="submit" action="#{ticketBean.doSearchBus}" />
+		<p:calendar value="#{stationBean.date1}" pattern="MM/dd/yyyy HH:mm:ss" />
+			<h:commandButton value="submit" action="#{stationBean.doSearchBus}" />
+			<h:dataTable value="#{stationBean.buses}" var="b" border="2">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="number" />
+					</f:facet>
+					<h:outputText value="#{b.number}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{b.number}" />
+					</f:facet>
+					<h:commandButton action="#{stationBean.doSelect}" value="select">
+						<f:setPropertyActionListener value="#{b}"
+							target="#{stationBean.busselected}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
 		</h:form>
 
 	</ui:define>

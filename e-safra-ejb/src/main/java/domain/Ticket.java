@@ -105,5 +105,5 @@ public class Ticket implements Serializable {
 	public void setBus(Bus bus) {
 		this.bus = bus;
 	}
-
+	
 }
