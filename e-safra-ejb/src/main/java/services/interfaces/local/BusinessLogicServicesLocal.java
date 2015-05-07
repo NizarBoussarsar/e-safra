@@ -75,4 +75,5 @@ public interface BusinessLogicServicesLocal {
 	Boolean assignSectionToLine(Integer idLine,
 			Map<Section, List<Station>> stationsMap);
 
+	Type findTypeByStationAndLine(Station station, Line line);
 }

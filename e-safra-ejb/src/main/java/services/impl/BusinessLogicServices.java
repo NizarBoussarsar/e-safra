@@ -508,4 +508,8 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		return b;
 
 	}
+	@Override
+	public Type findTypeByStationAndLine(Station station, Line line) {
+		return entityManager.find(Type.class, new TypeId(line.getId(),station.getId()));
+	}
 }

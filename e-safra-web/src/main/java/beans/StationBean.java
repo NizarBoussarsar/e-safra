@@ -12,7 +12,10 @@ import javax.faces.bean.ViewScoped;
 import services.interfaces.local.BusinessLogicServicesLocal;
 import services.interfaces.local.StationServicesLocal;
 import domain.Bus;
+import domain.Passenger;
+import domain.Section;
 import domain.Station;
+import domain.Type;
 
 @ManagedBean
 @ViewScoped
@@ -24,7 +27,7 @@ public class StationBean {
 	private Date date1;
 	private List<Bus> buses;
 	private Bus busselected;
-	
+
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
 
@@ -49,13 +52,17 @@ public class StationBean {
 	}
 
 	public String doSelect() {
-		
-		System.out.println("Bus selected=" + busselected.getNumber());
-		System.out.println("Selected line=" + busselected.getLine().getName());
-		System.out.println("User connected="
-				+ userBean.getUser().getFirstName());
-		System.out.println("Departure=" + stationDeparture);
-		System.out.println("Arrival=" + stationArrival);
+		List<Section> sections = businessLogicServicesLocal
+				.findSectionByStationsAndLine(stationDeparture, stationArrival,
+						busselected.getLine());
+		Double price = (double) (sections.size() * 600);
+		Type type1 = businessLogicServicesLocal.findTypeByStationAndLine(
+				stationDeparture, busselected.getLine());
+		Type type2 = businessLogicServicesLocal.findTypeByStationAndLine(
+				stationArrival, busselected.getLine());
+		System.out.println(businessLogicServicesLocal.buyTicket(
+				(Passenger) userBean.getUser(), busselected, type1, type2,
+				price));
 
 		return "";
 	}
