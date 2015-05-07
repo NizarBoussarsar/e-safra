@@ -90,4 +90,49 @@ public class Type implements Serializable {
 		this.section = section;
 	}
 
+	@Override
+	public String toString() {
+		return "Type [typeId=" + typeId + ", stationType=" + stationType
+				+ ", stationOrder=" + stationOrder + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((stationOrder == null) ? 0 : stationOrder.hashCode());
+		result = prime * result
+				+ ((stationType == null) ? 0 : stationType.hashCode());
+		result = prime * result + ((typeId == null) ? 0 : typeId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Type other = (Type) obj;
+		if (stationOrder == null) {
+			if (other.stationOrder != null)
+				return false;
+		} else if (!stationOrder.equals(other.stationOrder))
+			return false;
+		if (stationType == null) {
+			if (other.stationType != null)
+				return false;
+		} else if (!stationType.equals(other.stationType))
+			return false;
+		if (typeId == null) {
+			if (other.typeId != null)
+				return false;
+		} else if (!typeId.equals(other.typeId))
+			return false;
+		return true;
+	}
+
 }
