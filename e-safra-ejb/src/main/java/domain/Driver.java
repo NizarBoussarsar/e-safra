@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -21,7 +21,7 @@ public class Driver extends User implements Serializable {
 
 	private Integer seniority;
 	private String shift;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private List<Bus> buses;
@@ -54,7 +54,7 @@ public class Driver extends User implements Serializable {
 		this.shift = shift;
 	}
 
-	@OneToMany(mappedBy = "driver")
+	@ManyToMany
 	@JsonIgnore
 	public List<Bus> getBuses() {
 		return buses;

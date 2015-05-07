@@ -71,7 +71,6 @@ public class Passenger extends User implements Serializable {
 		result = prime * result + ((cash == null) ? 0 : cash.hashCode());
 		result = prime * result
 				+ ((facebookId == null) ? 0 : facebookId.hashCode());
-		result = prime * result + ((tickets == null) ? 0 : tickets.hashCode());
 		return result;
 	}
 
@@ -93,11 +92,6 @@ public class Passenger extends User implements Serializable {
 			if (other.facebookId != null)
 				return false;
 		} else if (!facebookId.equals(other.facebookId))
-			return false;
-		if (tickets == null) {
-			if (other.tickets != null)
-				return false;
-		} else if (!tickets.equals(other.tickets))
 			return false;
 		return true;
 	}

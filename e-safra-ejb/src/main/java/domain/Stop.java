@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Stop implements Serializable {
+
 	private StopId stopId;
 	private Integer nbFreeSpaces;
 
@@ -27,11 +28,9 @@ public class Stop implements Serializable {
 		super();
 	}
 
-	public Stop(Integer nbFreeSpaces, Bus bus, Station station) {
+	public Stop(Integer nbFreeSpaces) {
 		super();
 		this.nbFreeSpaces = nbFreeSpaces;
-		this.bus = bus;
-		this.station = station;
 		this.stopId = new StopId(bus.getId(), station.getId());
 	}
 

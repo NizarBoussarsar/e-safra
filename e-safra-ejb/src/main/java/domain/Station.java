@@ -27,8 +27,6 @@ public class Station implements Serializable {
 	private List<Stop> stops;
 	private List<Type> types;
 
-	// private List<Ticket> tickets;
-
 	public Station() {
 		super();
 	}
@@ -83,8 +81,6 @@ public class Station implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((stops == null) ? 0 : stops.hashCode());
-		result = prime * result + ((types == null) ? 0 : types.hashCode());
 		return result;
 	}
 
@@ -107,16 +103,6 @@ public class Station implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (stops == null) {
-			if (other.stops != null)
-				return false;
-		} else if (!stops.equals(other.stops))
-			return false;
-		if (types == null) {
-			if (other.types != null)
-				return false;
-		} else if (!types.equals(other.types))
-			return false;
 		return true;
 	}
 
@@ -124,15 +110,5 @@ public class Station implements Serializable {
 	public String toString() {
 		return "Station [id=" + id + ", name=" + name + "]";
 	}
-
-	// @OneToMany
-	// @JsonIgnore
-	// public List<Ticket> getTickets() {
-	// return tickets;
-	// }
-
-	// public void setTickets(List<Ticket> tickets) {
-	// this.tickets = tickets;
-	// }
 
 }

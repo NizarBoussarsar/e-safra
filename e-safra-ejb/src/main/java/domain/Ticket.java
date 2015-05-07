@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: Ticket
@@ -19,13 +20,14 @@ public class Ticket implements Serializable {
 	private Long number;
 	private Double price;
 	private Date date;
+	private Integer star;
 
 	private static final long serialVersionUID = 1L;
 
 	private Passenger passenger;
-	private Station departureStation;
-	private Station arrivalStation;
 	private Bus bus;
+	private Type typeDeparture;
+	private Type typeArrival;
 
 	// @Column(unique = true)
 
@@ -33,15 +35,11 @@ public class Ticket implements Serializable {
 		super();
 	}
 
-	public Ticket(Double price, Date date, Passenger passenger,
-			Station departureStation, Station arrivalStation, Bus bus) {
+	public Ticket(Long number, Double price, Date date) {
 		super();
+		this.number = number;
 		this.price = price;
 		this.date = date;
-		this.passenger = passenger;
-		this.departureStation = departureStation;
-		this.arrivalStation = arrivalStation;
-		this.bus = bus;
 	}
 
 	@Id
@@ -70,6 +68,14 @@ public class Ticket implements Serializable {
 		this.date = date;
 	}
 
+	public Integer getStar() {
+		return star;
+	}
+
+	public void setStar(Integer star) {
+		this.star = star;
+	}
+
 	@ManyToOne
 	public Passenger getPassenger() {
 		return passenger;
@@ -80,30 +86,30 @@ public class Ticket implements Serializable {
 	}
 
 	@ManyToOne
-	public Station getDepartureStation() {
-		return departureStation;
-	}
-
-	public void setDepartureStation(Station departureStation) {
-		this.departureStation = departureStation;
-	}
-
-	@ManyToOne
-	public Station getArrivalStation() {
-		return arrivalStation;
-	}
-
-	public void setArrivalStation(Station arrivalStation) {
-		this.arrivalStation = arrivalStation;
-	}
-
-	@ManyToOne
 	public Bus getBus() {
 		return bus;
 	}
 
 	public void setBus(Bus bus) {
 		this.bus = bus;
+	}
+
+	@OneToOne
+	public Type getTypeDeparture() {
+		return typeDeparture;
+	}
+
+	public void setTypeDeparture(Type typeDeparture) {
+		this.typeDeparture = typeDeparture;
+	}
+
+	@OneToOne
+	public Type getTypeArrival() {
+		return typeArrival;
+	}
+
+	public void setTypeArrival(Type typeArrival) {
+		this.typeArrival = typeArrival;
 	}
 
 }

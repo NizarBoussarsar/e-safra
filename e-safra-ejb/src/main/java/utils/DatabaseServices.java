@@ -20,6 +20,8 @@ import domain.Driver;
 import domain.Line;
 import domain.Passenger;
 import domain.Station;
+import domain.Type;
+import domain.TypeId;
 
 /**
  * Session Bean implementation class DatabaseServices
@@ -177,7 +179,7 @@ public class DatabaseServices {
 			charguiaTOmarsa.linkBusesToThisLine(listBuses5);
 			entityManager.persist(charguiaTOmarsa);
 
-			// Link some specific stations to a specific line
+			// Link some specific stations to a specific line => Create a type
 			Map<Integer, Station> stations1 = new HashMap<>();
 			stations1.put(0, marsa);
 			stations1.put(1, sidi_daoud);
@@ -224,15 +226,28 @@ public class DatabaseServices {
 			businessLogicServicesLocal.setLineStations(charguiaTOmarsa,
 					stations5);
 
-			// Create a ticket and assign it to a passenger
-			businessLogicServicesLocal.buyTicket(passenger2, marsa, sidi_daoud,
-					bus1, 1.1D);
-			businessLogicServicesLocal.buyTicket(passenger2, marsa,
-					la_goulette, bus1, 1.2D);
-			businessLogicServicesLocal.buyTicket(passenger2, marsa, rades,
-					bus1, 1.3D);
-			businessLogicServicesLocal.buyTicket(passenger2, marsa, megrine,
-					bus2, 1.4D);
+			// Fetch some types
+			Type type1 = entityManager.find(Type.class, new TypeId(1, 1));
+			Type type2 = entityManager.find(Type.class, new TypeId(1, 2));
+			Type type3 = entityManager.find(Type.class, new TypeId(1, 3));
+			Type type4 = entityManager.find(Type.class, new TypeId(1, 4));
+			Type type5 = entityManager.find(Type.class, new TypeId(1, 5));
+
+			// Create some tickets and assign it to a passenger
+			businessLogicServicesLocal.buyTicket(passenger2, bus1, type1,
+					type2, 1.1D);
+
+			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type2,
+			// 1.2D);
+			//
+			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type3,
+			// 1.3D);
+			//
+			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type4,
+			// 1.4D);
+			//
+			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type5,
+			// 1.5D);
 
 			// Report some bus stops
 			businessLogicServicesLocal.reportBusStop(2, bus3, ain_zaghouan);
@@ -240,9 +255,9 @@ public class DatabaseServices {
 			businessLogicServicesLocal.reportBusStop(1, bus7, charguia);
 
 			// Assign driver to bus
-			bus3.setDriver(driver1);
-			bus5.setDriver(driver2);
-			bus7.setDriver(driver3);
+			// bus3.setDrivers(driver1);
+			// bus5.setDriver(driver2);
+			// bus7.setDriver(driver3);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

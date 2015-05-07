@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -21,10 +22,12 @@ import services.interfaces.remote.BusinessLogicServicesRemote;
 import domain.Bus;
 import domain.Line;
 import domain.Passenger;
+import domain.Section;
 import domain.Station;
 import domain.Stop;
 import domain.Ticket;
 import domain.Type;
+import domain.TypeId;
 import domain.User;
 
 /**
@@ -169,7 +172,8 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				} else {
 					typeName = "Intermediate Station";
 				}
-				Type type = new Type(typeName, i, stations.get(i), line);
+				Type type = new Type(new TypeId(line.getId(), stations.get(i)
+						.getId()), typeName, i);
 				entityManager.persist(type);
 			}
 			b = true;
@@ -204,7 +208,9 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		try {
 			entityManager.persist(bus);
 			entityManager.persist(station);
-			Stop stop = new Stop(nbFreePlaces, bus, station);
+			Stop stop = new Stop(nbFreePlaces);
+			stop.setBus(bus);
+			stop.setStation(station);
 			entityManager.persist(stop);
 			b = true;
 		} catch (Exception e) {
@@ -390,23 +396,57 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		return line;
 	}
 
+	// Ici il y'a un probléme, un passenger peut prendre deux lignes
+	// différentes donc on peut tomber dans la meme section pour deux lignes
+	// différentes
+	@Override
+	public List<Section> findSectionByStationsAndLine(Station stationSource,
+			Station stationDest, Line line) {
+
+		List<Section> sections = new ArrayList<>();
+		try {
+			entityManager.merge(stationSource);
+			entityManager.merge(stationDest);
+			entityManager.merge(line);
+
+			Type typeSource = entityManager.find(Type.class,
+					new TypeId(line.getId(), stationSource.getId()));
+
+			Type typeDest = entityManager.find(Type.class,
+					new TypeId(line.getId(), stationDest.getId()));
+
+			sections.add(typeSource.getSection());
+			sections.add(typeDest.getSection());
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+		return sections;
+
+	}
+
 	// Here we should find a solution to manage the case when two passengers buy
 	// different tickets at the same time
 	@Override
-	public Boolean buyTicket(Passenger passenger, Station departureStation,
-			Station arrivalStation, Bus bus, Double price) {
+	public synchronized Boolean buyTicket(Passenger passenger, Bus bus,
+			Type typeDeparture, Type typeArrival, Double price) {
 		Boolean b = false;
 		try {
-			entityManager.merge(bus);
-			entityManager.merge(departureStation);
-			entityManager.merge(arrivalStation);
 			entityManager.merge(passenger);
-			if (bus != null && departureStation != null
-					&& arrivalStation != null && passenger != null) {
+			entityManager.merge(bus);
+			entityManager.merge(typeDeparture);
+			entityManager.merge(typeArrival);
+			if (passenger != null && bus != null && typeDeparture != null
+					&& typeArrival != null) {
 				if (passenger.getCash() > price) {
 					passenger.setCash(passenger.getCash() - price);
-					Ticket ticket = new Ticket(price, new Date(), passenger,
-							departureStation, arrivalStation, bus);
+					Ticket ticket = new Ticket(1L, price, new Date());
+					ticket.setPassenger(passenger);
+					ticket.setBus(bus);
+					ticket.setTypeArrival(typeArrival);
+					ticket.setTypeDeparture(typeDeparture);
 					entityManager.persist(passenger);
 					entityManager.persist(ticket);
 					// Here we should reduce the number of free places in
@@ -414,13 +454,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 
 					// Also we should think about synchronizing the ticket
 					// // buy procedure
-					// System.out.println("Ticket sold ! Your ticket number is : "
-					// + ticket.getNumber());
-					// System.out.println("Your remaining cash is : "
-					// + passenger.getCash());
 					b = true;
-				} else {
-					// System.out.println("You don't have enough cash !");
 				}
 			}
 		} catch (Exception e) {
@@ -448,5 +482,30 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			}
 		}
 		return busesGoingToArrivalStation;
+	}
+
+	@Override
+	public Boolean assignSectionToLine(Integer idLine,
+			Map<Section, List<Station>> stationsMap) {
+		Boolean b = false;
+		try {
+			for (Entry<Section, List<Station>> entry : stationsMap.entrySet()) {
+
+				Section section = entry.getKey();
+				List<Station> stations = entry.getValue();
+
+				for (Station station : stations) {
+					Type type = entityManager.find(Type.class, new TypeId(
+							idLine, station.getId()));
+					type.setSection(section);
+					entityManager.persist(section);
+				}
+			}
+			b = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return b;
+
 	}
 }
