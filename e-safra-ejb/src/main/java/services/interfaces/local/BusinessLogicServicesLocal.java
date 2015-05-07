@@ -13,8 +13,10 @@ import javax.ws.rs.core.MediaType;
 import domain.Bus;
 import domain.Line;
 import domain.Passenger;
+import domain.Section;
 import domain.Station;
 import domain.Stop;
+import domain.Type;
 import domain.User;
 
 @Local
@@ -61,10 +63,16 @@ public interface BusinessLogicServicesLocal {
 
 	Line findLineByName(String name);
 
-	Boolean buyTicket(Passenger passenger, Station departureStation,
-			Station arrivalStation, Bus bus, Double price);
+	List<Section> findSectionByStationsAndLine(Station stationSource,
+			Station stationDest, Line line);
+
+	Boolean buyTicket(Passenger passenger, Bus bus, Type typeDeparture,
+			Type typeArrival, Double price);
 
 	List<Bus> findComingSoonBusesGoingToStation(String departureStationName,
 			String arrivalStationName);
+
+	Boolean assignSectionToLine(Integer idLine,
+			Map<Section, List<Station>> stationsMap);
 
 }

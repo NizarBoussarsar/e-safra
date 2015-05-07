@@ -9,7 +9,7 @@ public class TypeId implements Serializable {
 
 	private Integer idLine;
 	private Integer idStation;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public TypeId() {

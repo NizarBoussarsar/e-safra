@@ -27,8 +27,6 @@ public class Station implements Serializable {
 	private List<Stop> stops;
 	private List<Type> types;
 
-	// private List<Ticket> tickets;
-
 	public Station() {
 		super();
 	}
@@ -108,15 +106,5 @@ public class Station implements Serializable {
 	public String toString() {
 		return "Station [id=" + id + ", name=" + name + "]";
 	}
-
-	// @OneToMany
-	// @JsonIgnore
-	// public List<Ticket> getTickets() {
-	// return tickets;
-	// }
-
-	// public void setTickets(List<Ticket> tickets) {
-	// this.tickets = tickets;
-	// }
 
 }
