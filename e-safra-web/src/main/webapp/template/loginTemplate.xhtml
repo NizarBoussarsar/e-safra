@@ -1,0 +1,99 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+
+	<title><ui:insert name="pageTitle" /></title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="animate.css" />
+	<h:outputStylesheet library="css" name="font-awesome.min.css" />
+	<h:outputStylesheet library="css" name="icon.css" />
+	<h:outputStylesheet library="css" name="font.css" />
+	<h:outputStylesheet library="css" name="app.css" />
+
+
+
+</h:head>
+
+
+
+
+
+<body class="">
+
+
+
+
+
+
+
+
+	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+		<div class="container aside-xl">
+			<a class="navbar-brand block" href="index.html">E-safra</a>
+			<section class="m-b-lg">
+				<header class="wrapper text-center">
+					<strong>Login</strong>
+				</header>
+				<h:form>
+					<div class="list-group">
+						<div class="list-group-item">
+							<ui:insert name="username" />
+
+
+
+						</div>
+						<div class="list-group-item">
+							<ui:insert name="password" />
+
+
+
+
+
+						</div>
+					</div>
+					<ui:insert name="submit" />
+
+
+
+
+					<div class="text-center m-t m-b">
+						<a href="#"><small>Forgot password?</small></a>
+					</div>
+					<div class="line line-dashed"></div>
+					<p class="text-muted text-center">
+						<small>Do not have an account?</small>
+					</p>
+					<a href="#" class="btn btn-lg btn-default btn-block">Create an
+						account</a>
+				</h:form>
+			</section>
+		</div>
+	</section>
+	<!-- footer -->
+	<footer id="footer">
+		<div class="text-center padder">
+			<p>
+				<small>Esprit</small>
+			</p>
+		</div>
+	</footer>
+	<!-- / footer -->
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<!-- Bootstrap -->
+	<h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+	<!-- App -->
+
+	<h:outputScript library="js" name="app.js"></h:outputScript>
+	<h:outputScript library="js/slimcroll" name="jquery.slimscroll.min.js"></h:outputScript>
+	<h:outputScript library="js" name="app.plugin.js"></h:outputScript>
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+
+</body>
+</html>
+

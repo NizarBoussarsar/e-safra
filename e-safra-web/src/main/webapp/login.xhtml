@@ -2,17 +2,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/template/template.xhtml">
+	template="/template/loginTemplate.xhtml">
 	<ui:define name="pageTitle">E-Safra : Login</ui:define>
-	<ui:define name="pageContent">
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputText value="Email" />
-				<h:inputText value="#{userBean.user.email}" />
-				<h:outputText value="Password" />
-				<h:inputSecret value="#{userBean.user.password}" />
-			</h:panelGrid>
-			<h:commandButton action="#{userBean.doLogin}" value="Login" />
-		</h:form>
+	<ui:define name="username">
+		<h:inputText styleClass="form-control no-border" id="username"
+			value="#{userBean.user.email}" />
 	</ui:define>
+	<ui:define name="password">
+		<h:inputSecret styleClass="form-control no-border" id="password"
+			value="#{userBean.user.password}" />
+	</ui:define>
+
+	<ui:define name="submit">
+		<h:commandButton styleClass="btn btn-lg btn-primary btn-block"
+			action="#{userBean.doLogin}" value="Login" />
+	</ui:define>
+
 </ui:composition>

@@ -4,32 +4,81 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/template/template.xhtml">
 	<ui:define name="pageTitle">E-Safra : Bus Manager Create Line</ui:define>
-	<ui:define name="pageContent">
-		<h1>Create Line</h1>
-		<h:form>
-			<h:panelGrid column="1">
-				<h:outputText value="Line name : " />
-				<h:inputText value="#{lineBean.line.name}" />
-			</h:panelGrid>
-			<br />
-			<h:dataTable border="1" value="#{lineBean.stationsDataModel}"
-				var="station">
-				<h:column id="column1">
-					<f:facet name="header">
-						<h:outputText value="Name" />
-					</f:facet>
-					<h:outputText value="#{station.name}" />
-				</h:column>
-				<h:column id="column2">
-					<f:facet name="header">
-						<h:outputText value="#" />
-					</f:facet>
-					<h:commandButton action="#{lineBean.doSelectLineStation}"
-						value="select" />
-				</h:column>
-			</h:dataTable>
-			<br />
-			<h:commandButton action="#{lineBean.doCreateLine}" value="Create" />
-		</h:form>
+	<ui:define name="page1">
+		<h:link styleClass="auto" outcome="home">
+			<i class="i i-statistics icon"> </i>
+			<span class="font-bold">Home</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page2">
+		<h:link styleClass="auto" outcome="assignbusestoline">
+			<i class="i i-cog2 icon"> </i>
+			<span class="font-bold">Assign buses to Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page3">
+		<h:link styleClass="auto" outcome="createline">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Create Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page4">
+		<h:link styleClass="auto" outcome="manageBuses">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Manage Buses</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="content">
+		<section class="panel panel-default">
+
+			<header class="panel-heading"> Create line </header>
+			<h:form>
+
+				<div class="row wrapper">
+					<div class="col-sm-5 m-b-xs">
+						<h:panelGrid column="1">
+							<h:outputText value="Line name : " />
+							<h:inputText value="#{lineBean.line.name}" />
+						</h:panelGrid>
+						<br />
+
+
+					</div>
+
+
+				</div>
+				<div class="table-responsive">
+
+					<h:dataTable styleClass="table table-striped b-t b-light"
+						border="1" value="#{lineBean.stationsDataModel}" var="station">
+						<h:column id="column1">
+							<f:facet name="header">
+								<h:outputText value="Name" />
+							</f:facet>
+							<h:outputText value="#{station.name}" />
+						</h:column>
+						<h:column id="column2">
+							<f:facet name="header">
+								<h:outputText value="Select" />
+							</f:facet>
+							<h:commandButton action="#{lineBean.doSelectLineStation}"
+								styleClass="btn btn-s-md btn-primary" value="select" />
+
+						</h:column>
+					</h:dataTable>
+
+
+
+
+				</div>
+				<footer class="panel-footer">
+					<h:commandButton styleClass="btn btn-s-md btn-success"
+						action="#{lineBean.doCreateLine}" value="Create" />
+
+				</footer>
+
+			</h:form>
+		</section>
+
 	</ui:define>
 </ui:composition>

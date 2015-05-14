@@ -4,43 +4,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/template/template.xhtml">
 	<ui:define name="pageTitle">E-Safra : Bus Manager Assign Buses To Line</ui:define>
-	<ui:define name="pageContent">
-		<h1>Assign Buses to Line</h1>
-		<h:form>
-			<!-- 	old -->
-			<!-- 		<h:selectOneMenu value="#{assignBusesLineBean.idSelectedLine}"> -->
-			<!-- 			<f:selectItems value="#{assignBusesLineBean.items}"></f:selectItems> -->
-			<!-- 		</h:selectOneMenu> -->
-			<!-- 	old -->
+	<ui:define name="page1">
+		<h:link styleClass="auto" outcome="home">
+			<i class="i i-statistics icon"> </i>
+			<span class="font-bold">Home</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page2">
+		<h:link styleClass="auto" outcome="assignbusestoline">
+			<i class="i i-cog2 icon"> </i>
+			<span class="font-bold">Assign buses to Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page3">
+		<h:link styleClass="auto" outcome="createline">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Create Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page4">
+		<h:link styleClass="auto" outcome="manageBuses">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Manage Buses</span>
+		</h:link>
+	</ui:define>
 
-			<!-- 	new -->
-			<h:selectOneMenu value="#{lineBean.line}" converter="lineConverter">
-				<f:selectItems value="#{lineBean.lines}" var="line"
-					itemValue="#{line}" itemLabel="#{line.name}" />
-			</h:selectOneMenu>
-			<!-- 	new -->
+	<ui:define name="content">
+		<section class="panel panel-default">
 
-			<!-- selectOneMenu prend en paramétre selectItems -->
-			<!-- fel managementBean naamel une méthode eli t3bi el selectItems -->
-			<!-- tekhou index eli houa l'id wel valye hya el name mathalan -->
+			<header class="panel-heading"> Assign buses to line </header>
+			<h:form>
+				<div class="row wrapper">
+					<div class="col-sm-5 m-b-xs">
 
-			<h:dataTable border="1" value="#{lineBean.buses}" var="bus">
-				<h:column id="column1">
-					<f:facet name="header">
-						<h:outputText value="Name" />
-					</f:facet>
-					<h:outputText value="#{bus.number}" />
-				</h:column>
-				<h:column id="column2">
-					<f:facet name="header">
-						<h:outputText value="#" />
-					</f:facet>
-					<h:selectBooleanCheckbox value="#{lineBean.checked[bus.id]}" />
-				</h:column>
-			</h:dataTable>
-			<br />
-			<h:commandButton value="submit"
-				action="#{lineBean.doAssignBusesLine}" />
-		</h:form>
+						<h:selectOneMenu style="width:166px"
+							styleClass="input-sm form-control input-s-sm inline v-middle"
+							value="#{lineBean.line}" converter="lineConverter">
+							<f:selectItems value="#{lineBean.lines}" var="line"
+								itemValue="#{line}" itemLabel="#{line.name}" />
+						</h:selectOneMenu>
+
+					</div>
+
+
+				</div>
+				<div class="table-responsive">
+					<h:dataTable styleClass="table table-striped b-t b-light"
+						border="1" value="#{lineBean.buses}" var="bus">
+						<h:column id="column1">
+							<f:facet name="header">
+								<h:outputText value="Name" />
+							</f:facet>
+							<h:outputText value="#{bus.number}" />
+						</h:column>
+						<h:column id="column2">
+							<f:facet name="header">
+								<h:outputText value="Assigned" />
+							</f:facet>
+
+							<h:selectBooleanCheckbox value="#{lineBean.checked[bus.id]}"
+								styleClass="checkbox m-n i-checks" />
+						</h:column>
+					</h:dataTable>
+
+
+
+
+				</div>
+				<footer class="panel-footer">
+					<h:commandButton styleClass="btn btn-s-md btn-success"
+						value="submit" action="#{lineBean.doAssignBusesLine}" />
+				</footer>
+
+			</h:form>
+		</section>
 	</ui:define>
 </ui:composition>

@@ -1,38 +1,296 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
+
+
 <h:head>
+
 	<title><ui:insert name="pageTitle" /></title>
-	<h:outputStylesheet library="css" name="application.css" />
-	<link rel="shortcut icon" type="image/x-con"
-		href="#{request.contextPath}/resources/img/favicon.ico" />
+
+
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="animate.css" />
+	<h:outputStylesheet library="css" name="font-awesome.min.css" />
+	<h:outputStylesheet library="css" name="icon.css" />
+	<h:outputStylesheet library="css" name="font.css" />
+	<h:outputStylesheet library="css" name="app.css" />
+
+
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 </h:head>
-<h:body>
-	<div id="container">
-		<div id="header">...HEADER...</div>
-		<hr></hr>
-		<div id="horizon">
-			<div id="topbar">
-				<ui:include src="/template/topbar.xhtml" />
+
+<body>
+	<section class="vbox">
+		<header
+			class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+			<div class="navbar-header aside-md dk">
+				<a class="btn btn-link visible-xs"
+					data-toggle="class:nav-off-screen" data-target="#nav"> <i
+					class="fa fa-bars"></i>
+				</a> <a href="index.html" class="navbar-brand"> <h:graphicImage
+						library="images" name="logo.png" alt="Esprit" styleClass="m-r-sm" />
+					<span class="hidden-nav-xs">E-safra</span>
+				</a> <a class="btn btn-link visible-xs" data-toggle="dropdown"
+					data-target=".user"> <i class="fa fa-cog"></i>
+				</a>
 			</div>
-			<div id="identity">
-				<ui:include src="/template/identity.xhtml" />
-			</div>
-		</div>
-		<hr></hr>
-		<div id="main">
-			<div id="navigation">
-				<ui:include src="/template/nav.xhtml" />
-			</div>
-			<div id="content">
-				<ui:insert name="pageContent" />
-			</div>
-		</div>
-		<hr></hr>
-		<div id="footer">...FOOTER...</div>
-	</div>
-</h:body>
+
+			<!--Application de Partage>
+
+      <ul class="nav navbar-nav hidden-xs">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="i i-grid"></i>
+          </a>
+		  
+          <section class="dropdown-menu aside-lg bg-white on animated fadeInLeft">
+            <div class="row m-l-none m-r-none m-t m-b text-center">
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-mail i-2x text-primary-lt"></i>
+                    </span>
+                    <small class="text-muted">Mailbox</small>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-calendar i-2x text-danger-lt"></i>
+                    </span>
+                    <small class="text-muted">Calendar</small>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-map i-2x text-success-lt"></i>
+                    </span>
+                    <small class="text-muted">Map</small>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-paperplane i-2x text-info-lt"></i>
+                    </span>
+                    <small class="text-muted">Trainning</small>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-images i-2x text-muted"></i>
+                    </span>
+                    <small class="text-muted">Photos</small>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="padder-v">
+                  <a href="#">
+                    <span class="m-b-xs block">
+                      <i class="i i-clock i-2x text-warning-lter"></i>
+                    </span>
+                    <small class="text-muted">Timeline</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </li>
+      </ul>
+	  		  <!Fin section Applications de partage-->
+
+
+			<ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
+				<!--Notifications>
+
+        <li class="hidden-xs">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="i i-chat3"></i>
+            <span class="badge badge-sm up bg-danger count">2</span>
+          </a>
+          <section class="dropdown-menu aside-xl animated flipInY">
+            <section class="panel bg-white">
+              <div class="panel-heading b-light bg-light">
+                <strong>You have <span class="count">2</span> notifications</strong>
+              </div>
+              <div class="list-group list-group-alt">
+                <a href="#" class="media list-group-item">
+                  <span class="pull-left thumb-sm">
+                    <img src="images/a0.png" alt="..." class="img-circle">
+                  </span>
+                  <span class="media-body block m-b-none">
+                    Use awesome animate.css<br>
+                    <small class="text-muted">10 minutes ago</small>
+                  </span>
+                </a>
+                <a href="#" class="media list-group-item">
+                  <span class="media-body block m-b-none">
+                    1.0 initial released<br>
+                    <small class="text-muted">1 hour ago</small>
+                  </span>
+                </a>
+              </div>
+              <div class="panel-footer text-sm">
+                <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+              </div>
+            </section>
+          </section>
+        </li>
+			  		<!Notifications-->
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <span class="thumb-sm avatar pull-left">
+							<h:graphicImage library="images" name="a0.png" alt="..." />
+					</span> <h:outputText value="#{userBean.user.firstName}" /> <b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu animated fadeInRight">
+						<li><span class="arrow top"></span> <a href="#">Settings</a>
+						</li>
+						<li><a href="profile.html">Profile</a></li>
+						<li><a href="#"> <span class="badge bg-danger pull-right">3</span>
+								Notifications
+						</a></li>
+						<li><a href="docs.html">Help</a></li>
+						<li class="divider"></li>
+						<li><h:form>
+								<h:commandLink action="#{userBean.doLogOut()}" value="Logout" />
+							</h:form></li>
+					</ul></li>
+			</ul>
+		</header>
+		<section>
+			<section class="hbox stretch">
+				<!-- .aside -->
+
+				<aside class="bg-black aside-md hidden-print" id="nav">
+					<section class="vbox">
+						<section class="w-f scrollable">
+							<div class="slim-scroll" data-height="auto"
+								data-disable-fade-out="true" data-distance="0" data-size="10px"
+								data-railOpacity="0.2">
+								<div class="clearfix wrapper dk nav-user hidden-xs">
+									<div class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<span class="thumb avatar pull-left m-r"> <h:graphicImage
+													library="images" name="a0.png" alt="..." /> <i
+												class="on md b-black"></i>
+										</span> <span class="hidden-nav-xs clear"> <span
+												class="block m-t-xs"> <strong
+													class="font-bold text-lt"><h:outputText
+															value="#{userBean.user.firstName}" /> </strong> <b class="caret"></b>
+											</span> <span class="text-muted text-xs block">Bus Manager</span>
+										</span>
+										</a>
+										<ul class="dropdown-menu animated fadeInRight m-t-xs">
+											<li><span class="arrow top hidden-nav-xs"></span> <a
+												href="#">Settings</a></li>
+											<li><a href="#">Profile</a></li>
+											<li><a href="#"> <span
+													class="badge bg-danger pull-right">3</span> Notifications
+											</a></li>
+											<li><a href="#">Help</a></li>
+											<li class="divider"></li>
+											<li><h:form>
+													<h:commandLink action="#{userBean.doLogOut()}"
+														value="Logout" />
+												</h:form></li>
+										</ul>
+									</div>
+								</div>
+
+								<nav class="nav-primary hidden-xs">
+									<div
+										class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">
+
+									</div>
+									<ul class="nav nav-main" data-ride="collapse">
+										<li><ui:insert name="page1" /></li>
+										<li><ui:insert name="page2" /></li>
+										<li><ui:insert name="page3" /></li>
+										<li><ui:insert name="page4" /></li>
+
+
+									</ul>
+
+								</nav>
+
+								<!-- / nav -->
+
+							</div>
+
+						</section>
+
+
+
+						<footer style="min-height: 450px"
+							class="footer hidden-xs no-padder text-center-nav-xs">
+							<!-- <a style="position: absolute; bottom: 0" href="#nav"
+								data-toggle="class:nav-xs"
+								class="btn btn-icon icon-muted btn-inactive m-l-xs m-r-xs">
+								<i class="i i-circleleft text"></i> <i
+								class="i i-circleright text-active"></i>
+							</a>
+							 -->
+						</footer>
+					</section>
+				</aside>
+
+				<section id="content">
+					<section class="hbox stretch"></section>
+					<section>
+						<section class="vbox">
+							<section class="scrollable padder">
+								<ui:insert name="content" />
+							</section>
+						</section>
+					</section>
+				</section>
+			</section>
+		</section>
+	</section>
+
+
+
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
+
+
+	<!-- start: JavaScript-->
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+	<!-- Bootstrap -->
+	<h:outputScript library="js" name="app.js"></h:outputScript>
+
+	<h:outputScript library="js" name="app.plugin.js"></h:outputScript>
+
+
+
+
+	<h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+	<!-- App -->
+
+
+
+	<!-- end: JavaScript-->
+</body>
 </html>

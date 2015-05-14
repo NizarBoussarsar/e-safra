@@ -4,7 +4,35 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/template/template.xhtml">
 	<ui:define name="pageTitle">E-Safra : Bus Manager Home</ui:define>
-	<ui:define name="pageContent">
+	<ui:define name="page1">
+		<h:link styleClass="auto" outcome="home">
+			<i class="i i-statistics icon"> </i>
+			<span class="font-bold">Home</span>
+		</h:link>
+
+
+
+
+	</ui:define>
+	<ui:define name="page2">
+		<h:link styleClass="auto" outcome="assignbusestoline">
+			<i class="i i-cog2 icon"> </i>
+			<span class="font-bold">Assign buses to Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page3">
+		<h:link styleClass="auto" outcome="createline">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Create Line</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="page4">
+		<h:link styleClass="auto" outcome="manageBuses">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Manage Buses</span>
+		</h:link>
+	</ui:define>
+	<ui:define name="content">
 		<h1>Bus Manager Home Page</h1>
 	</ui:define>
 </ui:composition>

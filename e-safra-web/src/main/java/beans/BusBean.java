@@ -79,4 +79,12 @@ public class BusBean {
 		this.visibility = visibility;
 	}
 
+	public LineBean getLineBean() {
+		return lineBean;
+	}
+
+	public void setLineBean(LineBean lineBean) {
+		this.lineBean = lineBean;
+	}
+
 }
