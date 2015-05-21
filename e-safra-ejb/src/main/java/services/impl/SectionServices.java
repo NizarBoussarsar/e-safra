@@ -1,10 +1,12 @@
 package services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import services.interfaces.local.SectionServicesLocal;
 import services.interfaces.remote.SectionServicesRemote;
@@ -69,20 +71,43 @@ public class SectionServices implements SectionServicesRemote,
 
 	@Override
 	public Boolean updateSection(Section section) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean b = false;
+		try {
+			entityManager.merge(section);
+			b = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			;
+			return null;
+		}
+		return b;
 	}
 
 	@Override
 	public Section findSectionById(Integer id) {
-		// TODO Auto-generated method stub
+		try {
+			return entityManager.find(Section.class, id);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			;
+		}
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Section> findAllSections() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Section> sections = new ArrayList<>();
+		try {
+			String jpql = "select s from Section s";
+			Query query = entityManager.createQuery(jpql);
+			sections = query.getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			;
+			return null;
+		}
+		return sections;
 	}
 
 }
