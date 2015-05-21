@@ -234,9 +234,9 @@ public class DatabaseServices {
 			Type type5 = entityManager.find(Type.class, new TypeId(1, 5));
 
 			// Create some tickets and assign it to a passenger
-			businessLogicServicesLocal.buyTicket(passenger2, bus1, type1,
+		/*	businessLogicServicesLocal.buyTicket(passenger2, bus1, type1,
 					type2, 1.1D);
-
+		*/
 			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type2,
 			// 1.2D);
 			//

@@ -31,7 +31,7 @@ public class Type implements Serializable {
 
 	public Type(TypeId typeId, String stationType, Integer stationOrder) {
 		super();
-		this.typeId = new TypeId(line.getId(), station.getId());
+		this.typeId = typeId;
 		this.stationType = stationType;
 		this.stationOrder = stationOrder;
 	}
