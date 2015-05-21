@@ -25,6 +25,7 @@ import domain.Passenger;
 import domain.Section;
 import domain.Station;
 import domain.Stop;
+import domain.StopId;
 import domain.Ticket;
 import domain.Type;
 import domain.TypeId;
@@ -206,9 +207,10 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	public Boolean reportBusStop(Integer nbFreePlaces, Bus bus, Station station) {
 		Boolean b = false;
 		try {
-			entityManager.persist(bus);
-			entityManager.persist(station);
-			Stop stop = new Stop(nbFreePlaces);
+			entityManager.merge(bus);
+			entityManager.merge(station);
+			Stop stop = new Stop(new StopId(bus.getId(), station.getId()),
+					nbFreePlaces);
 			stop.setBus(bus);
 			stop.setStation(station);
 			entityManager.persist(stop);
@@ -422,24 +424,62 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			System.out.println(e.getMessage());
 			return null;
 		}
-
 		return sections;
-
 	}
 
-	// Here we should find a solution to manage the case when two passengers buy
-	// different tickets at the same time
+	@Override
+	public Double getPriceBySectionNumber(Integer sectionNumber) {
+		Double price = 0D;
+		switch (sectionNumber) {
+		case 1:
+			price = 320D;
+			break;
+		case 2:
+			price = 470D;
+			break;
+		case 3:
+			price = 650D;
+			break;
+		case 4:
+			price = 800D;
+			break;
+		case 5:
+			price = 970D;
+			break;
+		case 6:
+			price = 1170D;
+			break;
+		case 7:
+			price = 1350D;
+			break;
+		case 8:
+			price = 1550D;
+			break;
+		default:
+			break;
+		}
+		return price;
+	}
+
 	@Override
 	public synchronized Boolean buyTicket(Passenger passenger, Bus bus,
-			Type typeDeparture, Type typeArrival, Double price) {
+			Station stationDeparture, Station stationArrival) {
 		Boolean b = false;
 		try {
 			entityManager.merge(passenger);
 			entityManager.merge(bus);
-			entityManager.merge(typeDeparture);
-			entityManager.merge(typeArrival);
-			if (passenger != null && bus != null && typeDeparture != null
-					&& typeArrival != null) {
+			entityManager.merge(stationDeparture);
+			entityManager.merge(stationArrival);
+			if (passenger != null && bus != null && stationDeparture != null
+					&& stationArrival != null) {
+				Type typeDeparture = entityManager.find(Type.class, new TypeId(
+						bus.getLine().getId(), stationArrival.getId()));
+				Type typeArrival = entityManager.find(Type.class, new TypeId(
+						bus.getLine().getId(), stationArrival.getId()));
+				Integer sectionNumber = typeArrival.getSection().getRank()
+						- typeDeparture.getSection().getRank();
+				Double price = getPriceBySectionNumber(sectionNumber);
+				System.out.println("Price " + price);
 				if (passenger.getCash() > price) {
 					passenger.setCash(passenger.getCash() - price);
 					Ticket ticket = new Ticket(1L, price, new Date());
@@ -447,13 +487,12 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 					ticket.setBus(bus);
 					ticket.setTypeArrival(typeArrival);
 					ticket.setTypeDeparture(typeDeparture);
+					Stop stop = entityManager.find(Stop.class,
+							new StopId(bus.getId(), stationDeparture.getId()));
+					stop.setNbFreeSpaces(stop.getNbFreeSpaces() - 1);
+					entityManager.persist(stop);
 					entityManager.persist(passenger);
 					entityManager.persist(ticket);
-					// Here we should reduce the number of free places in
-					// this bus
-
-					// Also we should think about synchronizing the ticket
-					// // buy procedure
 					b = true;
 				}
 			}
@@ -508,8 +547,10 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		return b;
 
 	}
+
 	@Override
 	public Type findTypeByStationAndLine(Station station, Line line) {
-		return entityManager.find(Type.class, new TypeId(line.getId(),station.getId()));
+		return entityManager.find(Type.class,
+				new TypeId(line.getId(), station.getId()));
 	}
 }

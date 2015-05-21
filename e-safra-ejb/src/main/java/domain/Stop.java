@@ -28,10 +28,10 @@ public class Stop implements Serializable {
 		super();
 	}
 
-	public Stop(Integer nbFreeSpaces) {
+	public Stop(StopId stopId, Integer nbFreeSpaces) {
 		super();
 		this.nbFreeSpaces = nbFreeSpaces;
-		this.stopId = new StopId(bus.getId(), station.getId());
+		this.stopId = stopId;
 	}
 
 	@EmbeddedId

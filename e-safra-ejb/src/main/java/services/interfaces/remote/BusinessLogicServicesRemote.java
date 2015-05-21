@@ -57,8 +57,10 @@ public interface BusinessLogicServicesRemote {
 	List<Section> findSectionByStationsAndLine(Station stationSource,
 			Station stationDest, Line line);
 
-	Boolean buyTicket(Passenger passenger, Bus bus, Type typeDeparture,
-			Type typeArrival, Double price);
+	Boolean buyTicket(Passenger passenger, Bus bus, Station stationDeparture,
+			Station stationArrival);
+
+	Double getPriceBySectionNumber(Integer sectionNumber);
 
 	List<Bus> findComingSoonBusesGoingToStation(String departureStationName,
 			String arrivalStationName);
