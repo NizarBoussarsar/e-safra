@@ -19,5 +19,8 @@ public interface UserServicesLocal {
 
 	User findUserById(Integer id);
 
+	Boolean findUserByEmail(String email);
+
 	List<User> findAllUsers();
+
 }

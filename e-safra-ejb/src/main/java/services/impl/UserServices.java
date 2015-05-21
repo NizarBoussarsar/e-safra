@@ -106,4 +106,23 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return users;
 	}
 
+	@Override
+	public Boolean findUserByEmail(String email) {
+		String jpql = "select u from User u where u.email=" + "'" + email + "'";
+		Boolean test = false;
+		User user = new User();
+		try {
+
+			Query query = entityManager.createQuery(jpql);
+
+			user = (User) query.getSingleResult();
+			if (user != null)
+				test = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return test;
+		}
+		System.out.println("test=" + test);
+		return test;
+	}
 }
