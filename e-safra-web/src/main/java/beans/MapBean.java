@@ -29,7 +29,8 @@ public class MapBean {
 	private Station stationStart;
 	private Station stationFinal;
 	private List<Station> stationsList;
-	private Line line; // 1
+	private Line line = new Line(); // 1
+	private List<Line> lines;
 
 	private String stationsDeclare;
 	private String startStationDeclare;
@@ -38,8 +39,18 @@ public class MapBean {
 
 	private String myLat, myLan;
 	private String firstStation, lastStation;
+	private Integer selectedId;
 
 	public MapBean() {
+	}
+
+	public String doSelectLine() {
+
+		System.out.println("IM INNNNNNNN !");
+		selectedId = line.getId();
+		System.out.println("LINE ID " + selectedId);
+		Init();
+		return "";
 	}
 
 	@PostConstruct
@@ -47,8 +58,16 @@ public class MapBean {
 		stationsDeclare = "";
 		startStationDeclare = "";
 		pushString = "";
+		lines = lineServicesLocal.findAllLines();
 
-		stationsList = businessLogicServicesLocal.findStationsByLineId(1);
+		if (line.getId() != null) {
+			selectedId = line.getId();
+		} else {
+			selectedId = 1;
+		}
+
+		stationsList = businessLogicServicesLocal
+				.findStationsByLineId(selectedId);
 
 		myLat = stationsList.get(0).getLatitude();
 		myLan = stationsList.get(0).getLongitude();
@@ -83,7 +102,6 @@ public class MapBean {
 		}
 
 	}
-
 
 	public StationServicesLocal getStationServicesLocal() {
 		return stationServicesLocal;
@@ -196,6 +214,14 @@ public class MapBean {
 
 	public void setLastStation(String lastStation) {
 		this.lastStation = lastStation;
+	}
+
+	public List<Line> getLines() {
+		return lines;
+	}
+
+	public void setLines(List<Line> lines) {
+		this.lines = lines;
 	}
 
 }
