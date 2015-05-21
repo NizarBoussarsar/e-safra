@@ -75,6 +75,7 @@ public class MapBean {
 		firstStation = stationsList.get(0).getName().replaceAll("\\s", "");
 		lastStation = stationsList.get(stationsList.size() - 1).getName()
 				.replaceAll("\\s", "");
+		String marker;
 
 		for (Station station : stationsList) {
 
@@ -82,12 +83,22 @@ public class MapBean {
 					+ "= new google.maps.LatLng(" + station.getLatitude()
 					+ ", " + station.getLongitude() + "); \n";
 			/********/
+			if (station.getId() == stationsList.get(0).getId()) {
+				marker = "startm";
+			} else if (station.getId() == stationsList.get(
+					stationsList.size() - 1).getId()) {
+				marker = "endm";
+			} else {
+				marker = "image";
+			}
+
 			startStationDeclare += "var "
 					+ station.getName().replaceAll("\\s", "")
 					+ "Marker = new google.maps.Marker({ position :"
 					+ station.getName().replaceAll("\\s", "")
 					+ ", map : map, title : '" + stationsList.get(0).getName()
-					+ "', icon : image }); \n";
+					+ "', icon : " + marker
+					+ ",        labelContent: '$425K' }); \n";
 			/*********/
 
 			if ((station.getId() != stationsList.get(0).getId())

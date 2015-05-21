@@ -54,6 +54,8 @@ function initialize() {
 	transitLayer.setMap(map);
 	var image = "./images/pin56.png";
 	var user = "./images/user.png";
+	var startm = "./images/start_marker.png";
+	var endm = "./images/end_marker.png";
 	
 ////////////
 #{mapBean.startStationDeclare}
@@ -177,19 +179,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					<h:dataTable border="0" value="#{mapBean.lines}" var="l">
 						<h:column id="column1">
 							<f:facet name="header">
-								<h:outputText value="Line" />
+								<h:outputText value="Select Line" />
 							</f:facet>
 
-							<h:commandLink action="#{mapBean.doSelectLine()}"
-								value="#{l.name}">
-								<f:setPropertyActionListener value="#{l}"
-									target="#{mapBean.line}"></f:setPropertyActionListener>
-							</h:commandLink>
-							<!--  	<h:commandButton action="#{mapBean.doSelectLine()}"
-							value="#{l.name}">
-							
-						</h:commandButton>
-						-->
+							<b><h:commandLink action="#{mapBean.doSelectLine()}"
+									value="#{l.name}">
+									<f:setPropertyActionListener value="#{l}"
+										target="#{mapBean.line}"></f:setPropertyActionListener>
+								</h:commandLink></b>
+
 						</h:column>
 
 					</h:dataTable>
