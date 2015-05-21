@@ -485,8 +485,6 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 					Ticket ticket = new Ticket(1L, price, new Date());
 					ticket.setPassenger(passenger);
 					ticket.setBus(bus);
-					ticket.setTypeArrival(typeArrival);
-					ticket.setTypeDeparture(typeDeparture);
 					Stop stop = entityManager.find(Stop.class,
 							new StopId(bus.getId(), stationDeparture.getId()));
 					stop.setNbFreeSpaces(stop.getNbFreeSpaces() - 1);

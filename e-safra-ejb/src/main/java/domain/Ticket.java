@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: Ticket
@@ -26,8 +25,6 @@ public class Ticket implements Serializable {
 
 	private Passenger passenger;
 	private Bus bus;
-	private Type typeDeparture;
-	private Type typeArrival;
 
 	// @Column(unique = true)
 
@@ -92,24 +89,6 @@ public class Ticket implements Serializable {
 
 	public void setBus(Bus bus) {
 		this.bus = bus;
-	}
-
-	@OneToOne
-	public Type getTypeDeparture() {
-		return typeDeparture;
-	}
-
-	public void setTypeDeparture(Type typeDeparture) {
-		this.typeDeparture = typeDeparture;
-	}
-
-	@OneToOne
-	public Type getTypeArrival() {
-		return typeArrival;
-	}
-
-	public void setTypeArrival(Type typeArrival) {
-		this.typeArrival = typeArrival;
 	}
 
 	@Override

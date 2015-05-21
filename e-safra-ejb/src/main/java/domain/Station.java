@@ -21,6 +21,8 @@ public class Station implements Serializable {
 
 	private Integer id;
 	private String name;
+	private String latitude;
+	private String longitude;
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,9 +33,11 @@ public class Station implements Serializable {
 		super();
 	}
 
-	public Station(String name) {
+	public Station(String name, String latitude, String longitude) {
 		super();
 		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	@Id
@@ -55,6 +59,22 @@ public class Station implements Serializable {
 		this.name = name;
 	}
 
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 	@OneToMany(mappedBy = "station")
 	@JsonIgnore
 	public List<Stop> getStops() {
@@ -74,8 +94,6 @@ public class Station implements Serializable {
 	public void setTypes(List<Type> types) {
 		this.types = types;
 	}
-
-	
 
 	@Override
 	public int hashCode() {
