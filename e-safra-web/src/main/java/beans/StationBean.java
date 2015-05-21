@@ -13,9 +13,7 @@ import services.interfaces.local.BusinessLogicServicesLocal;
 import services.interfaces.local.StationServicesLocal;
 import domain.Bus;
 import domain.Passenger;
-import domain.Section;
 import domain.Station;
-import domain.Type;
 
 @ManagedBean
 @ViewScoped
@@ -52,17 +50,10 @@ public class StationBean {
 	}
 
 	public String doSelect() {
-		List<Section> sections = businessLogicServicesLocal
-				.findSectionByStationsAndLine(stationDeparture, stationArrival,
-						busselected.getLine());
-		Double price = (double) (sections.size() * 600);
-		Type type1 = businessLogicServicesLocal.findTypeByStationAndLine(
-				stationDeparture, busselected.getLine());
-		Type type2 = businessLogicServicesLocal.findTypeByStationAndLine(
-				stationArrival, busselected.getLine());
+
 		System.out.println(businessLogicServicesLocal.buyTicket(
-				(Passenger) userBean.getUser(), busselected, type1, type2,
-				price));
+				(Passenger) userBean.getUser(), busselected, stationDeparture,
+				stationArrival));
 
 		return "";
 	}
