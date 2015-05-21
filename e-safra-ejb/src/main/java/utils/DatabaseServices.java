@@ -20,8 +20,6 @@ import domain.Driver;
 import domain.Line;
 import domain.Passenger;
 import domain.Station;
-import domain.Type;
-import domain.TypeId;
 
 /**
  * Session Bean implementation class DatabaseServices
@@ -124,23 +122,28 @@ public class DatabaseServices {
 			Bus bus16 = new Bus("B16");
 			entityManager.persist(bus16);
 
-			Station marsa = new Station("Marsa");
+			Station marsa = new Station("Marsa", "36.876389", "10.325278");
 			entityManager.persist(marsa);
-			Station sidi_daoud = new Station("Sidi Daoud");
+			Station sidi_daoud = new Station("Sidi Daoud", "36.866001",
+					"10.309098");
 			entityManager.persist(sidi_daoud);
-			Station la_goulette = new Station("La Goulette");
+			Station la_goulette = new Station("La Goulette", "36.818056",
+					"10.305000");
 			entityManager.persist(la_goulette);
-			Station rades = new Station("Rades");
+			Station rades = new Station("Rades", "36.766667", "10.283333");
 			entityManager.persist(rades);
-			Station megrine = new Station("Megrine");
+			Station megrine = new Station("Megrine", "36.766667", "10.233333");
 			entityManager.persist(megrine);
-			Station ain_zaghouan = new Station("Ain Zaghouan");
+			Station ain_zaghouan = new Station("Ain Zaghouan", "36.858764",
+					"10.285253");
 			entityManager.persist(ain_zaghouan);
-			Station les_berges_du_lac = new Station("Les berges du lac");
+			Station les_berges_du_lac = new Station("Les berges du lac",
+					"36.840390", "10.251600");
 			entityManager.persist(les_berges_du_lac);
-			Station charguia = new Station("Charguia");
+			Station charguia = new Station("Charguia", "36.844274", "10.206750");
 			entityManager.persist(charguia);
-			Station borj_louzir = new Station("Borj Louzir");
+			Station borj_louzir = new Station("Borj Louzir", "36.865090",
+					"10.212355");
 			entityManager.persist(borj_louzir);
 
 			List<Bus> listBuses1 = new ArrayList<>();
@@ -227,16 +230,17 @@ public class DatabaseServices {
 					stations5);
 
 			// Fetch some types
-			Type type1 = entityManager.find(Type.class, new TypeId(1, 1));
-			Type type2 = entityManager.find(Type.class, new TypeId(1, 2));
-			Type type3 = entityManager.find(Type.class, new TypeId(1, 3));
-			Type type4 = entityManager.find(Type.class, new TypeId(1, 4));
-			Type type5 = entityManager.find(Type.class, new TypeId(1, 5));
+			// Type type1 = entityManager.find(Type.class, new TypeId(1, 1));
+			// Type type2 = entityManager.find(Type.class, new TypeId(1, 2));
+			// Type type3 = entityManager.find(Type.class, new TypeId(1, 3));
+			// Type type4 = entityManager.find(Type.class, new TypeId(1, 4));
+			// Type type5 = entityManager.find(Type.class, new TypeId(1, 5));
 
 			// Create some tickets and assign it to a passenger
-		/*	businessLogicServicesLocal.buyTicket(passenger2, bus1, type1,
-					type2, 1.1D);
-		*/
+
+			businessLogicServicesLocal.buyTicket(passenger2, bus1, marsa,
+					charguia);
+
 			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type2,
 			// 1.2D);
 			//
@@ -255,9 +259,7 @@ public class DatabaseServices {
 			businessLogicServicesLocal.reportBusStop(1, bus7, charguia);
 
 			// Assign driver to bus
-			// bus3.setDrivers(driver1);
-			// bus5.setDriver(driver2);
-			// bus7.setDriver(driver3);
+			bus3.setDriver(driver1);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

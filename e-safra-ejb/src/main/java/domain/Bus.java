@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -28,8 +27,7 @@ public class Bus implements Serializable {
 
 	private List<Stop> stops;
 	private Line line;
-	private List<Driver> drivers;
-	private List<Ticket> tickets;
+	private Driver driver;
 
 	public Bus() {
 		super();
@@ -78,24 +76,13 @@ public class Bus implements Serializable {
 		this.line = line;
 	}
 
-	@ManyToMany(mappedBy = "buses")
-	@JsonIgnore
-	public List<Driver> getDrivers() {
-		return drivers;
+	@ManyToOne
+	public Driver getDriver() {
+		return driver;
 	}
 
-	public void setDrivers(List<Driver> drivers) {
-		this.drivers = drivers;
-	}
-
-	@OneToMany(mappedBy = "bus")
-	@JsonIgnore
-	public List<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(List<Ticket> tickets) {
-		this.tickets = tickets;
+	public void setDriver(Driver driver) {
+		this.driver = driver;
 	}
 
 	@Override
