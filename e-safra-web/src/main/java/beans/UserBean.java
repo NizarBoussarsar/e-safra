@@ -9,6 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import services.interfaces.local.BusinessLogicServicesLocal;
+import services.interfaces.local.UserServicesLocal;
 import domain.BusManager;
 import domain.Driver;
 import domain.Passenger;
@@ -20,12 +21,41 @@ import domain.User;
 public class UserBean {
 
 	private User user = new User();
+	private Passenger passenger = new Passenger();
 	private Boolean loggedInAsBusManager = false;
 	private Boolean loggedInAsPassenger = false;
 	private Boolean loggedInAsDriver = false;
-
+	private Boolean visibility = false;
+	private String ConfirmPassword = "";
+	private String ErrorMessage;
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
+	@EJB
+	private UserServicesLocal userServicesLocal;
+
+	public String doInscription() {
+		String navigateTo = "";
+		System.out.println("ConfirmPassword" + ConfirmPassword);
+		if (passenger.getPassword().equals(ConfirmPassword)) {
+			if (userServicesLocal.findUserByEmail(passenger.getEmail())) {
+				ErrorMessage = "Email address alrady in use";
+				visibility = true;
+			} else {
+				System.out.println("we will add a user");
+
+				userServicesLocal.addUser(passenger);
+				navigateTo = "/pages/passenger/home?faces-redirect=true";
+			}
+		} else {
+			ErrorMessage = "The passwords are not matching";
+			visibility = true;
+		}
+		return navigateTo;
+	}
+
+	public String goToInscription() {
+		return "/inscription?faces-redirect=true";
+	}
 
 	public String doLogin() {
 		String navigateTo = "";
@@ -61,9 +91,11 @@ public class UserBean {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	public Station doFindUserByName(String name) {
 		return businessLogicServicesLocal.findStationByName(name);
 	}
+
 	public User getUser() {
 		return user;
 	}
@@ -94,6 +126,38 @@ public class UserBean {
 
 	public void setLoggedInAsDriver(Boolean loggedInAsDriver) {
 		this.loggedInAsDriver = loggedInAsDriver;
+	}
+
+	public String getConfirmPassword() {
+		return ConfirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		ConfirmPassword = confirmPassword;
+	}
+
+	public boolean isVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(boolean visibility) {
+		this.visibility = visibility;
+	}
+
+	public String getErrorMessage() {
+		return ErrorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		ErrorMessage = errorMessage;
+	}
+
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
 	}
 
 }

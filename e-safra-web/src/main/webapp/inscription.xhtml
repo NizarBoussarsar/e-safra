@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<h:panelGrid column="2">
+			<h:outputText value="Email" />
+			<h:inputText id="email" value="#{inscriptionBean.passenger.email}"
+				required="true">
+				<f:validator validatorId="validator.EmailValidator" />
+			</h:inputText>
+
+			<h:message for="email" style="color:red" />
+
+
+			<h:outputText value="First Name" />
+			<h:inputText value="#{inscriptionBean.passenger.firstName}" />
+
+			<h:outputText value="Last Name" />
+			<h:inputText value="#{inscriptionBean.passenger.lastName}" />
+
+			<h:outputText value="Gender" />
+			<h:inputText value="#{inscriptionBean.passenger.gender}" />
+
+			<h:outputText value="Date of birth" />
+			<p:calendar value="#{inscriptionBean.passenger.birthDay}"
+				pattern="MM/dd/yyyy" />
+
+			<h:outputText value="Password" />
+			<h:inputText id="password"
+				value="#{inscriptionBean.passenger.password}" required="true" />
+			<h:message for="password" style="color:red" />
+
+			<h:outputText value="Confirm Password" />
+			<h:inputText id="confirmPassword"
+				value="#{inscriptionBean.confirmPassword}" required="true" />
+			<h:message for="confirmPassword" style="color:red" />
+
+			<h:commandButton action="#{inscriptionBean.doInscription}"
+				value="Login" />
+			<h:panelGrid rendered="#{inscriptionBean.visibility}">
+				<h:outputText value="#{inscriptionBean.errorMessage}" />
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:form>
+</body>
+</html>
