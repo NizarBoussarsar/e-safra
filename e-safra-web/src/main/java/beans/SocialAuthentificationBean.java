@@ -41,7 +41,7 @@ public class SocialAuthentificationBean implements Serializable {
 			manager = new SocialAuthManager();
 			manager.setSocialAuthConfig(config);
 
-			String successURL = "http://localhost:8483/esafra-local/pages/public/social/success.jsf";
+			String successURL = "http://localhost:8483/e-safra-web/pages/public/social/success.jsf";
 
 			String authenticationURL = manager.getAuthenticationUrl(providerID,
 					successURL);
@@ -65,7 +65,10 @@ public class SocialAuthentificationBean implements Serializable {
 			if (this.manager != null) {
 				AuthProvider provider = manager.connect(map);
 				this.profile = provider.getUserProfile();
-
+				this.profile.getValidatedId();
+				
+				///this.profile.getProviderId();
+				
 				// // Do what you want with the data (e.g. persist to the
 				// database,
 				// // etc.)
