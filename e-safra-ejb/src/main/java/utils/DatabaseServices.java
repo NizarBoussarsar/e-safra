@@ -19,6 +19,7 @@ import domain.BusManager;
 import domain.Driver;
 import domain.Line;
 import domain.Passenger;
+import domain.Section;
 import domain.Station;
 
 /**
@@ -145,6 +146,24 @@ public class DatabaseServices {
 			Station borj_louzir = new Station("Borj Louzir", "36.865090",
 					"10.212355");
 			entityManager.persist(borj_louzir);
+
+			// Create sections
+			Section section1 = new Section("Section 1", 1);
+			entityManager.persist(section1);
+			Section section2 = new Section("Section 2", 2);
+			entityManager.persist(section2);
+			Section section3 = new Section("Section 3", 3);
+			entityManager.persist(section3);
+			Section section4 = new Section("Section 4", 4);
+			entityManager.persist(section4);
+			Section section5 = new Section("Section 5", 5);
+			entityManager.persist(section5);
+			Section section6 = new Section("Section 6", 6);
+			entityManager.persist(section6);
+			Section section7 = new Section("Section 7", 7);
+			entityManager.persist(section7);
+			Section section8 = new Section("Section 8", 8);
+			entityManager.persist(section8);
 
 			List<Bus> listBuses1 = new ArrayList<>();
 			listBuses1.add(bus1);

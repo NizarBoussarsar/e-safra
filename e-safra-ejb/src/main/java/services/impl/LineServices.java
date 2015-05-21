@@ -35,7 +35,8 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.persist(line);
 			b = true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 			return null;
 		}
 		return b;
@@ -48,7 +49,8 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.remove(entityManager.merge(line));
 			b = true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 			return null;
 		}
 		return b;
@@ -63,7 +65,8 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			b = true;
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 			return null;
 		}
 		return b;
@@ -76,7 +79,8 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 			entityManager.merge(line);
 			b = true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 			return null;
 		}
 		return b;
@@ -87,7 +91,8 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 		try {
 			return entityManager.find(Line.class, id);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 		}
 		return null;
 	}
@@ -95,16 +100,17 @@ public class LineServices implements LineServicesRemote, LineServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Line> findAllLines() {
-		List<Line> Lines = new ArrayList<>();
+		List<Line> lines = new ArrayList<>();
 		try {
 			String jpql = "select s from Line s";
 			Query query = entityManager.createQuery(jpql);
-			Lines = query.getResultList();
+			lines = query.getResultList();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
+			;
 			return null;
 		}
-		return Lines;
+		return lines;
 	}
 
 }

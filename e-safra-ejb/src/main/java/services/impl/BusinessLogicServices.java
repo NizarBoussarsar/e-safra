@@ -165,6 +165,9 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		try {
 			entityManager.persist(line);
 			String typeName = "";
+			Integer firstTier = stations.size() / 3;
+			Integer secondTier = (stations.size() / 3) * 2;
+			Integer thirdTier = stations.size();
 			for (int i = 0; i < stations.size(); i++) {
 				if (i == 0) {
 					typeName = "Departure Terminal";
@@ -175,6 +178,12 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				}
 				Type type = new Type(new TypeId(line.getId(), stations.get(i)
 						.getId()), typeName, i);
+				if (i >= 0 & i <= firstTier)
+					type.setSection(findSectionByRank(1));
+				if (i > firstTier & i <= secondTier)
+					type.setSection(findSectionByRank(2));
+				if (i > secondTier & i <= thirdTier)
+					type.setSection(findSectionByRank(3));
 				entityManager.persist(type);
 			}
 			b = true;
@@ -384,6 +393,22 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	}
 
 	@Override
+	public Section findSectionByRank(Integer rank) {
+		Section section = null;
+		try {
+			String jpql = "select s from Section s where s.rank = :param1";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("param1", rank);
+			section = (Section) query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println("nizar");
+			System.out.println(e.getMessage());
+			return null;
+		}
+		return section;
+	}
+
+	@Override
 	public Line findLineByName(String name) {
 		Line line = null;
 		try {
@@ -396,35 +421,6 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			return null;
 		}
 		return line;
-	}
-
-	// Ici il y'a un probléme, un passenger peut prendre deux lignes
-	// différentes donc on peut tomber dans la meme section pour deux lignes
-	// différentes
-	@Override
-	public List<Section> findSectionByStationsAndLine(Station stationSource,
-			Station stationDest, Line line) {
-
-		List<Section> sections = new ArrayList<>();
-		try {
-			entityManager.merge(stationSource);
-			entityManager.merge(stationDest);
-			entityManager.merge(line);
-
-			Type typeSource = entityManager.find(Type.class,
-					new TypeId(line.getId(), stationSource.getId()));
-
-			Type typeDest = entityManager.find(Type.class,
-					new TypeId(line.getId(), stationDest.getId()));
-
-			sections.add(typeSource.getSection());
-			sections.add(typeDest.getSection());
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-		return sections;
 	}
 
 	@Override

@@ -63,8 +63,7 @@ public interface BusinessLogicServicesLocal {
 
 	Line findLineByName(String name);
 
-	List<Section> findSectionByStationsAndLine(Station stationSource,
-			Station stationDest, Line line);
+	Section findSectionByRank(Integer rank);
 
 	Boolean buyTicket(Passenger passenger, Bus bus, Station stationDeparture,
 			Station stationArrival);

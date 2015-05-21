@@ -28,9 +28,8 @@ public class Section implements Serializable {
 		super();
 	}
 
-	public Section(Integer id, String name, Integer rank) {
+	public Section(String name, Integer rank) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.rank = rank;
 	}
