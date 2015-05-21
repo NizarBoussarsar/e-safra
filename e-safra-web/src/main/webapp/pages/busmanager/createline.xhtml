@@ -44,7 +44,7 @@
 				<div class="table-responsive">
 
 					<h:dataTable styleClass="table table-striped b-t b-light"
-						border="1" value="#{lineBean.stationsDataModel}" var="station">
+						border="1" value="#{lineBean.stations}" var="station">
 						<h:column id="column1">
 							<f:facet name="header">
 								<h:outputText value="Name" />
@@ -56,7 +56,10 @@
 								<h:outputText value="Select" />
 							</f:facet>
 							<h:commandButton action="#{lineBean.doSelectLineStation}"
-								styleClass="btn btn-s-md btn-primary" value="select" />
+								styleClass="btn btn-s-md btn-primary" value="select">
+								<f:setPropertyActionListener value="#{station}"
+									target="#{lineBean.selectedStation}"></f:setPropertyActionListener>
+							</h:commandButton>
 						</h:column>
 					</h:dataTable>
 				</div>

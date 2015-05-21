@@ -197,9 +197,8 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	public Boolean setLineBuses(Line line, List<Bus> buses) {
 		Boolean b = false;
 		try {
-			entityManager.persist(line); // entityManager.merge(line)
 			line.linkBusesToThisLine(buses);
-			entityManager.persist(line);
+			entityManager.merge(line);
 			for (Bus bus : buses) {
 				entityManager.merge(bus);
 			}
@@ -473,8 +472,8 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 						bus.getLine().getId(), stationArrival.getId()));
 				Type typeArrival = entityManager.find(Type.class, new TypeId(
 						bus.getLine().getId(), stationArrival.getId()));
-				Integer sectionNumber = typeArrival.getSection().getRank()
-						- typeDeparture.getSection().getRank();
+				Integer sectionNumber = (typeArrival.getSection().getRank() - typeDeparture
+						.getSection().getRank()) + 1;
 				Double price = getPriceBySectionNumber(sectionNumber);
 				System.out.println("Price " + price);
 				if (passenger.getCash() > price) {

@@ -22,8 +22,6 @@
 					itemValue="#{st}" itemLabel="#{st.name}" />
 			</h:selectOneMenu>
 			<br />
-		Date:
-		
 			<h:commandButton value="submit" action="#{stationBean.doSearchBus}" />
 			<h:dataTable value="#{stationBean.buses}" var="b" border="2">
 				<h:column>
@@ -41,9 +39,7 @@
 							target="#{stationBean.busselected}"></f:setPropertyActionListener>
 					</h:commandButton>
 				</h:column>
-
 			</h:dataTable>
 		</h:form>
-
 	</ui:define>
 </ui:composition>
