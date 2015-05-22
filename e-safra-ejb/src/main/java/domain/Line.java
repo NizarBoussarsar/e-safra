@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,7 +66,7 @@ public class Line implements Serializable {
 		this.types = types;
 	}
 
-	@OneToMany(mappedBy = "line")
+	@OneToMany(mappedBy = "line", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	public List<Bus> getBuses() {
 		return buses;

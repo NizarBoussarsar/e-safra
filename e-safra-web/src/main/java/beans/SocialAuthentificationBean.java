@@ -41,7 +41,7 @@ public class SocialAuthentificationBean implements Serializable {
 			manager = new SocialAuthManager();
 			manager.setSocialAuthConfig(config);
 
-			String successURL = "http://localhost:8483/esafra-local/pages/public/social/success.jsf";
+			String successURL = "http://localhost:8483/e-safra-web/pages/public/social/success.jsf";
 
 			String authenticationURL = manager.getAuthenticationUrl(providerID,
 					successURL);
@@ -78,7 +78,7 @@ public class SocialAuthentificationBean implements Serializable {
 
 			} else {
 				System.out.println("SocialAuthManager instance is null");
-				String homeURL = "http://localhost:8483/esafra-local/pages/public/index.jsf";
+				String homeURL = "http://localhost:8483/e-safra-web/pages/public/index.jsf";
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect(homeURL);
 			}
@@ -89,7 +89,7 @@ public class SocialAuthentificationBean implements Serializable {
 	}
 
 	public String doRedirectToButtonPage() {
-		String homeURL = "http://localhost:8483/esafra-local/pages/public/social/buttons.jsf";
+		String homeURL = "http://localhost:8483/e-safra-web/pages/public/social/buttons.jsf";
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect(homeURL);
@@ -109,7 +109,7 @@ public class SocialAuthentificationBean implements Serializable {
 
 			externalContext.invalidateSession();
 
-			String homeURL = "http://localhost:8483/esafra-local/pages/public/index.jsf";
+			String homeURL = "http://localhost:8483/e-safra-web/pages/public/index.jsf";
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect(homeURL);
 

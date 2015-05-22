@@ -22,8 +22,6 @@
 					itemValue="#{st}" itemLabel="#{st.name}" />
 			</h:selectOneMenu>
 			<br />
-		Date:
-		<p:calendar value="#{stationBean.date1}" pattern="MM/dd/yyyy HH:mm:ss" />
 			<h:commandButton value="submit" action="#{stationBean.doSearchBus}" />
 			<h:dataTable value="#{stationBean.buses}" var="b" border="2">
 				<h:column>
@@ -41,10 +39,7 @@
 							target="#{stationBean.busselected}"></f:setPropertyActionListener>
 					</h:commandButton>
 				</h:column>
-
 			</h:dataTable>
 		</h:form>
-
 	</ui:define>
->>>>>>> refs/remotes/origin/master
 </ui:composition>

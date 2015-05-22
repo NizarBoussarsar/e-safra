@@ -5,11 +5,12 @@
 <h:head></h:head>
 <h:body>
 	<h:form>
-		<!-- 		<h:outputText style="display:none;" -->
-		<!-- 			value="#{userSession.pullUserInfo()}" /> -->
 		<h:outputText value="First name : #{userSession.profile.firstName} !!" />
 		<br></br>
 		<h:outputText value="Last name : #{userSession.profile.lastName} !!" />
+		<br></br>
+		<h:outputText
+			value="Facebook ID : #{userSession.profile.providerId} !!" />
 		<br></br>
 		<h:commandButton action="#{userSession.doRedirectToButtonPage}"
 			value="home" type="submit" />
