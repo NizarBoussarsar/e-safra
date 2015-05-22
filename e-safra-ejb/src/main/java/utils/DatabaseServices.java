@@ -257,20 +257,17 @@ public class DatabaseServices {
 
 			// Create some tickets and assign it to a passenger
 
-			businessLogicServicesLocal.buyTicket(passenger2, bus1, marsa,
+			businessLogicServicesLocal.buyTicket(passenger2, bus3, marsa,
 					charguia);
 
-			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type2,
-			// 1.2D);
-			//
-			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type3,
-			// 1.3D);
-			//
-			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type4,
-			// 1.4D);
-			//
-			// businessLogicServicesLocal.buyTicket(passenger2, bus1, type5,
-			// 1.5D);
+			businessLogicServicesLocal.buyTicket(passenger3, bus3, marsa,
+					les_berges_du_lac);
+
+			businessLogicServicesLocal.buyTicket(passenger4, bus3, marsa,
+					ain_zaghouan);
+
+			businessLogicServicesLocal.buyTicket(passenger4, bus10, charguia,
+					marsa);
 
 			// Report some bus stops
 			businessLogicServicesLocal.reportBusStop(2, bus3, ain_zaghouan);
