@@ -9,14 +9,14 @@
 	<ui:define name="content">
 		<h1>Passenger Home Page</h1>
 		<h:form>
-			<label>Please select your travel:</label>
+			<h4>Please select your travel:</h4>
 			<br />
 			<h:selectOneMenu value="#{stationBean.stationDeparture}"
 				converter="stationConverter">
 				<f:selectItems value="#{stationBean.stations}" var="sta"
 					itemValue="#{sta}" itemLabel="#{sta.name}" />
 			</h:selectOneMenu>
-Destinataire :
+Destination :
 		<h:selectOneMenu value="#{stationBean.stationArrival}"
 				converter="stationConverter">
 				<f:selectItems value="#{stationBean.stations2}" var="st"
