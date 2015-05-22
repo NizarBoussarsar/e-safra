@@ -1,7 +1,6 @@
 package services.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -462,12 +461,14 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			Station stationDeparture, Station stationArrival) {
 		Boolean b = false;
 		try {
-			entityManager.merge(passenger);
-			entityManager.merge(bus);
-			entityManager.merge(stationDeparture);
-			entityManager.merge(stationArrival);
+			// entityManager.merge(passenger);
+			// entityManager.merge(bus);
+			// entityManager.merge(stationDeparture);
+			// entityManager.merge(stationArrival);
+
 			if (passenger != null && bus != null && stationDeparture != null
 					&& stationArrival != null) {
+
 				Type typeDeparture = entityManager.find(Type.class, new TypeId(
 						bus.getLine().getId(), stationArrival.getId()));
 				Type typeArrival = entityManager.find(Type.class, new TypeId(
@@ -477,15 +478,18 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				Double price = getPriceBySectionNumber(sectionNumber);
 				System.out.println("Price " + price);
 				if (passenger.getCash() > price) {
+
 					passenger.setCash(passenger.getCash() - price);
-					Ticket ticket = new Ticket(1L, price, new Date());
+					Ticket ticket = new Ticket(price);
+
 					ticket.setPassenger(passenger);
 					ticket.setBus(bus);
-					Stop stop = entityManager.find(Stop.class,
-							new StopId(bus.getId(), stationDeparture.getId()));
-					stop.setNbFreeSpaces(stop.getNbFreeSpaces() - 1);
-					entityManager.persist(stop);
-					entityManager.persist(passenger);
+					// Stop stop = entityManager.find(Stop.class,
+					// new StopId(bus.getId(), stationDeparture.getId()));
+					// stop.setNbFreeSpaces(stop.getNbFreeSpaces() - 1);
+
+					// entityManager.merge(stop);
+					entityManager.merge(passenger);
 					entityManager.persist(ticket);
 					b = true;
 				}
