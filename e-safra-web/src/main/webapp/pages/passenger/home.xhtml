@@ -1,4 +1,3 @@
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -27,19 +26,26 @@
 				</h:selectOneMenu>
 			</h:panelGrid>
 
+			<br />
+
+			<h:commandButton style="vertical-align:baseline;margin-left:21px"
+				styleClass="btn btn-s-md btn-success" value="Search"
+				action="#{stationBean.doSearchBus}" />
+
+			<br />
 			<div class="table-responsive" style="width: 40%; margin-top: 2%">
 
 				<h:dataTable styleClass="table table-striped b-t b-light"
 					value="#{stationBean.buses}" var="b" border="2">
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="number" />
+							<h:outputText value="Bus number" />
 						</f:facet>
 						<h:outputText value="#{b.number}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="#{b.number}" />
+							<h:outputText value="Action" />
 						</f:facet>
 						<h:commandButton styleClass="btn btn-s-md btn-primary"
 							action="#{stationBean.doSelect}" value="Select">
@@ -48,12 +54,6 @@
 						</h:commandButton>
 					</h:column>
 				</h:dataTable>
-				<h:commandButton styleClass="btn btn-s-md btn-primary"
-					value="submit" action="#{stationBean.doSearchBus}" />
-				<br /> <br />
-
-
-
 			</div>
 		</h:form>
 	</ui:define>
