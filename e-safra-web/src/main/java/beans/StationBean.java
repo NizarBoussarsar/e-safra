@@ -38,6 +38,12 @@ public class StationBean {
 		return userBean;
 	}
 
+	public String doSaveOrUpdate() {
+		stationServicesLocal.updateStation(station);
+		visibility = false;
+		return "";
+	}
+
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
 	}
