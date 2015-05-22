@@ -3,11 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
-
-
 <h:head>
-
 	<title><ui:insert name="pageTitle" /></title>
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputStylesheet library="css" name="animate.css" />
@@ -15,63 +11,37 @@
 	<h:outputStylesheet library="css" name="icon.css" />
 	<h:outputStylesheet library="css" name="font.css" />
 	<h:outputStylesheet library="css" name="app.css" />
-
+	<h:outputStylesheet library="css" name="bootstrap-social.css" />
 
 
 </h:head>
-
-
-
-
-
 <body class="">
-
-
-
-
-
-
-
-
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+
 		<div class="container aside-xl">
 			<a class="navbar-brand block" href="index.html">E-safra</a>
 			<section class="m-b-lg">
 				<header class="wrapper text-center">
-					<strong>Login</strong>
+					<ui:insert name="title"></ui:insert>
 				</header>
-				<h:form>
-					<div class="list-group">
-						<div class="list-group-item">
-							<ui:insert name="username" />
+				<div class="list-group">
+
+					<ui:insert name="username" />
+
+					<ui:insert name="password" />
+
+					<ui:insert name="register" />
+
+				</div>
 
 
-
-						</div>
-						<div class="list-group-item">
-							<ui:insert name="password" />
+				<ui:insert name="submit" />
+				<div class="line line-dashed"></div>
 
 
+				<ui:insert name="inscription" />
 
 
-
-						</div>
-					</div>
-					<ui:insert name="submit" />
-
-
-
-
-					<div class="text-center m-t m-b">
-						<a href="#"><small>Forgot password?</small></a>
-					</div>
-					<div class="line line-dashed"></div>
-					<p class="text-muted text-center">
-						<small>Do not have an account?</small>
-					</p>
-					<a href="#" class="btn btn-lg btn-default btn-block">Create an
-						account</a>
-				</h:form>
 			</section>
 		</div>
 	</section>
@@ -79,7 +49,8 @@
 	<footer id="footer">
 		<div class="text-center padder">
 			<p>
-				<small>Esprit</small>
+				<small> <h:outputText value="SmarTeam 2014-2015 " />
+				</small>
 			</p>
 		</div>
 	</footer>
