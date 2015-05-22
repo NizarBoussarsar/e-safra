@@ -15,10 +15,13 @@ import services.interfaces.local.BusinessLogicServicesLocal;
 import services.interfaces.local.LineServicesLocal;
 import services.interfaces.local.SectionServicesLocal;
 import services.interfaces.local.StationServicesLocal;
+import services.interfaces.local.UserServicesLocal;
 import domain.Bus;
+import domain.Driver;
 import domain.Line;
 import domain.Section;
 import domain.Station;
+import domain.User;
 
 @ManagedBean
 @ViewScoped
@@ -39,6 +42,9 @@ public class LineBean {
 	@EJB
 	private SectionServicesLocal sectionServicesLocal;
 
+	@EJB
+	private UserServicesLocal userServicesLocal;
+
 	public LineBean() {
 		// TODO Auto-generated constructor stub
 	}
@@ -46,6 +52,7 @@ public class LineBean {
 	private Line line;
 	private List<Line> lines;
 	private List<Bus> buses;
+	private Bus bus;
 	private Map<Integer, Boolean> checked;
 	private Map<Integer, Integer> selected;
 	private List<Station> stations;
@@ -54,6 +61,10 @@ public class LineBean {
 	private Station selectedStation;
 	private List<Section> sections;
 	private Section section;
+	private List<Driver> drivers;
+	private Driver driver;
+
+	private Boolean visibility;
 
 	@PostConstruct
 	public void init() {
@@ -68,6 +79,15 @@ public class LineBean {
 		selectedStation = new Station();
 		section = new Section();
 		selected = new HashMap<>();
+		drivers = new ArrayList<>();
+		for (User user : userServicesLocal.findAllUsers()) {
+			if (user instanceof Driver) {
+				drivers.add((Driver) user);
+			}
+		}
+		driver = new Driver();
+		bus = new Bus();
+		visibility = false;
 	}
 
 	public Line doFindLineByName(String name) {
@@ -97,15 +117,53 @@ public class LineBean {
 	}
 
 	public String doAssignSectionsToLine() {
-		System.out.println("test : "
-				+ businessLogicServicesLocal.assignSectionsToLine(line.getId(),
-						selected));
-		return "";
+		// System.out.println("test : "
+		// + businessLogicServicesLocal.assignSectionsToLine(line.getId(),
+		// selected));
+		return "/pages/busManager/assignbusestoline?faces-redirect=true";
 	}
 
 	public String doUpdateListStations() {
 		stations2 = businessLogicServicesLocal.findStationsByLineId(line
 				.getId());
+		return "";
+	}
+
+	public String doSelectDriver() {
+		visibility = true;
+		return "";
+	}
+
+	public String doSaveOrUpdateDriver() {
+		userServicesLocal.updateUser(driver);
+		visibility = false;
+		for (User user : userServicesLocal.findAllUsers()) {
+			if (user instanceof Driver) {
+				drivers.add((Driver) user);
+			}
+		}
+		return "";
+	}
+
+	public String doAddDriver() {
+		userServicesLocal.addUser(driver);
+		visibility = false;
+		for (User user : userServicesLocal.findAllUsers()) {
+			if (user instanceof Driver) {
+				drivers.add((Driver) user);
+			}
+		}
+		return "";
+	}
+
+	public String doDeleteDriver() {
+		userServicesLocal.deleteUser(driver);
+		visibility = false;
+		for (User user : userServicesLocal.findAllUsers()) {
+			if (user instanceof Driver) {
+				drivers.add((Driver) user);
+			}
+		}
 		return "";
 	}
 
@@ -203,6 +261,38 @@ public class LineBean {
 
 	public void setSelected(Map<Integer, Integer> selected) {
 		this.selected = selected;
+	}
+
+	public List<Driver> getDrivers() {
+		return drivers;
+	}
+
+	public void setDrivers(List<Driver> drivers) {
+		this.drivers = drivers;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
+
+	public Boolean getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(Boolean visibility) {
+		this.visibility = visibility;
 	}
 
 }
