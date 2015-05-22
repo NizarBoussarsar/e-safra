@@ -28,6 +28,12 @@
 			<span class="font-bold">Manage Buses</span>
 		</h:link>
 	</ui:define>
+	<ui:define name="page5">
+		<h:link styleClass="auto" outcome="manageStations">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Manage Stations</span>
+		</h:link>
+	</ui:define>
 
 	<ui:define name="content">
 		<h:form>
@@ -37,13 +43,13 @@
 					value="#{busBean.buses}" var="b" border="2">
 					<h:column id="column1">
 						<f:facet name="header">
-							<h:outputText value="number" />
+							<h:outputText value="Bus Number" />
 						</f:facet>
 						<h:outputText value="#{b.number}" />
 					</h:column>
 					<h:column id="column2">
 						<f:facet name="header">
-							<h:outputText value="#{b.number}" />
+							<h:outputText value="Action" />
 						</f:facet>
 						<h:commandButton styleClass="btn btn-s-md btn-primary"
 							action="#{busBean.doSelect}" value="select">
