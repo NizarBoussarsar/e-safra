@@ -456,9 +456,10 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	}
 
 	@Override
-	public synchronized Boolean buyTicket(Passenger passenger, Bus bus,
+	public synchronized Ticket buyTicket(Passenger passenger, Bus bus,
 			Station stationDeparture, Station stationArrival) {
-		Boolean b = false;
+
+		Ticket ticket = null;
 		try {
 			if (passenger != null && bus != null && stationDeparture != null
 					&& stationArrival != null) {
@@ -473,7 +474,7 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 				if (passenger.getCash() > price) {
 
 					passenger.setCash(passenger.getCash() - price);
-					Ticket ticket = new Ticket(price);
+					ticket = new Ticket(price);
 
 					ticket.setPassenger(passenger);
 					ticket.setBus(bus);
@@ -483,13 +484,13 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 					// entityManager.merge(stop);
 					entityManager.merge(passenger);
 					entityManager.persist(ticket);
-					b = true;
+
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return b;
+		return ticket;
 	}
 
 	@Override

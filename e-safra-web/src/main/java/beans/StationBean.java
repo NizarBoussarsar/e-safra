@@ -6,16 +6,17 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import services.interfaces.local.BusinessLogicServicesLocal;
 import services.interfaces.local.StationServicesLocal;
 import domain.Bus;
 import domain.Passenger;
 import domain.Station;
+import domain.Ticket;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class StationBean {
 	private List<Station> stations = new ArrayList<>();
 	private List<Station> stations2 = new ArrayList<>();
@@ -25,6 +26,17 @@ public class StationBean {
 	private List<Bus> buses;
 	private Bus busselected;
 	private Station station = new Station();
+	private Ticket ticket;
+	Passenger passenger;
+
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+	}
+
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
 
@@ -38,12 +50,14 @@ public class StationBean {
 		return userBean;
 	}
 
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
+	public String doSaveOrUpdate() {
+		stationServicesLocal.updateStation(station);
+		visibility = false;
+		return "";
 	}
 
-	public String doSome() {
-		return "";
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 	public String doSelectInCrud() {
@@ -53,15 +67,18 @@ public class StationBean {
 
 	public String doSelect() {
 
-		Passenger passenger = (Passenger) userBean.getUser();
+		passenger = (Passenger) userBean.getUser();
+
 		System.out.println("email Passenger" + passenger.getEmail());
 		System.out.println("busselected" + busselected.getNumber());
 		System.out.println("stationDeparture" + stationDeparture.getName());
 		System.out.println("stationArrival" + stationDeparture.getName());
-		System.out.println("BuY Ticket"
-				+ businessLogicServicesLocal.buyTicket(passenger, busselected,
-						stationDeparture, stationArrival));
 
+		ticket = businessLogicServicesLocal.buyTicket(passenger, busselected,
+				stationDeparture, stationArrival);
+		if (ticket != null) {
+			return "/pages/passenger/ticket?faces-redirect=true";
+		}
 		return "";
 	}
 
@@ -143,6 +160,14 @@ public class StationBean {
 
 	public void setVisibility(Boolean visibility) {
 		this.visibility = visibility;
+	}
+
+	public Ticket getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
 	}
 
 }

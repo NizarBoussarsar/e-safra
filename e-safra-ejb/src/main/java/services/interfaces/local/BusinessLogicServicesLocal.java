@@ -16,6 +16,7 @@ import domain.Passenger;
 import domain.Section;
 import domain.Station;
 import domain.Stop;
+import domain.Ticket;
 import domain.Type;
 import domain.User;
 
@@ -65,7 +66,7 @@ public interface BusinessLogicServicesLocal {
 
 	Section findSectionByRank(Integer rank);
 
-	Boolean buyTicket(Passenger passenger, Bus bus, Station stationDeparture,
+	Ticket buyTicket(Passenger passenger, Bus bus, Station stationDeparture,
 			Station stationArrival);
 
 	Double getPriceBySectionNumber(Integer sectionNumber);
