@@ -72,18 +72,16 @@
 					<h:outputText value="#{inscriptionBean.errorMessage}" />
 				</h:panelGrid>
 			</div>
-		</h:form>
-	</ui:define>
-	<ui:define name="submit">
-		<h:form>
+
+
+
 			<h:commandLink action="#{inscriptionBean.doInscription}"
 				styleClass="btn btn-block btn-social btn-google">
 				<i class="fa fa-sign-in"></i> Sign up
 		</h:commandLink>
 			<h:outputLink value="login.jsf"
 				styleClass="btn  btn-social btn-block btn-twitter">
-				<i class="fa fa-sign-out"></i> Sign in
-</h:outputLink>
+				<i class="fa fa-sign-out"></i> Sign in</h:outputLink>
 		</h:form>
 	</ui:define>
 
