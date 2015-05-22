@@ -20,20 +20,10 @@
 					<p:message for="email" style="color:red" />
 				</div>
 				<div class="list-group-item">
-					<h:outputText value="Gender" />
-					<h:selectOneRadio value="#{inscriptionBean.passenger.gender}">
-						<f:selectItem itemValue="M" itemLabel="Male" />
-						<f:selectItem itemValue="F" itemLabel="Female" />
-					</h:selectOneRadio>
 
-					<h:outputText value="Date of birth" />
-					<p:calendar value="#{inscriptionBean.passenger.birthDay}"
-						pattern="MM/dd/yyyy" />
-					=======
 					<p:inputText styleClass="form-control no-border" name="firstname"
 						placeholder="First Name" id="FirstName" type="text placeholder"
 						value="#{inscriptionBean.passenger.firstName}" />
-					>>>>>>> refs/remotes/origin/master
 
 				</div>
 				<div class="list-group-item">
