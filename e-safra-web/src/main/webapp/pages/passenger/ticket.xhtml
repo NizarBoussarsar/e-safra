@@ -11,17 +11,19 @@
 		name="jspdf.plugin.split_text_to_size.js"></h:outputScript>
 	<h:outputScript library="js/jspdf"
 		name="jspdf.plugin.standard_fonts_metrics.js"></h:outputScript>
-
-
 </h:head>
 
 <h:body>
-	<div>
-		<h2>TICKET</h2>
-		<div>PRICE :</div>
-		<div>Line :</div>
-		<div>USER :</div>
-	</div>
+	<h2>TICKET</h2>
+	<div># #{stationBean.ticket.number}</div>
+	<div>Price : #{stationBean.ticket.price}$</div>
+	<div>For : #{stationBean.ticket.passenger.firstName}
+		#{stationBean.ticket.passenger.lastName}</div>
+	<div>Line : #{stationBean.ticket.bus.line.name}</div>
+	<div>From/To : #{stationBean.stationDeparture.name} |
+		#{stationBean.stationArrival.name}</div>
+	<div>Bus : #{stationBean.ticket.bus.number}</div>
+
 </h:body>
 
 <script type="text/javascript">
