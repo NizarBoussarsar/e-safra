@@ -1,13 +1,64 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/template/template.xhtml">
-	<ui:define name="pageTitle">E-Safra : 404</ui:define>
-	<ui:define name="pageContent">
-		<h1>404</h1>
-		<h2>Oups !!! We're not able to locate the requested URL.</h2>
-		<div>Sorry, we're working hard to fix this issue. Please move
-			back to our home page</div>
-	</ui:define>
-</ui:composition>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>E-safra 404</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href='http://fonts.googleapis.com/css?family=Amarante'
+		rel='stylesheet' type='text/css' />
+	<h:outputStylesheet>
+body {
+	background: url(images/bg.png);
+	margin: 0;
+}
+
+.wrap {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+.logo {
+	text-align: center;
+}
+
+.logo p span {
+	color: lightgreen;
+}
+
+.sub a {
+	color: white;
+	background: rgba(0, 0, 0, 0.3);
+	text-decoration: none;
+	padding: 5px 10px;
+	font-size: 13px;
+	font-family: arial, serif;
+	font-weight: bold;
+}
+
+.footer {
+	color: #555;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	font-weight: bold;
+	font-family: arial, serif;
+}
+
+.footer a {
+	font-size: 16px;
+	color: #ff4800;
+}
+</h:outputStylesheet>
+</h:head>
+
+
+<h:body>
+	<h:graphicImage library="images" name="label.png" />
+
+
+
+</h:body>
+</html>
