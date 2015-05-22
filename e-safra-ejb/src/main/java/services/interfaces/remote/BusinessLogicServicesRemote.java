@@ -64,8 +64,9 @@ public interface BusinessLogicServicesRemote {
 	List<Bus> findComingSoonBusesGoingToStation(String departureStationName,
 			String arrivalStationName);
 
-	Boolean assignSectionToLine(Integer idLine,
-			Map<Section, List<Station>> stationsMap);
+	Boolean assignSectionsToLine(Integer idLine, Map<Integer, Integer> map);
 
 	Type findTypeByStationAndLine(Station station, Line line);
+
+	User findUserByEmail(String email);
 }

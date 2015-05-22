@@ -14,9 +14,7 @@
 				required="true">
 				<f:validator validatorId="validator.EmailValidator" />
 			</h:inputText>
-
 			<h:message for="email" style="color:red" />
-
 
 			<h:outputText value="First Name" />
 			<h:inputText value="#{inscriptionBean.passenger.firstName}" />
@@ -29,6 +27,7 @@
 				<f:selectItem itemValue="M" itemLabel="Male" />
 				<f:selectItem itemValue="F" itemLabel="Female" />
 			</h:selectOneRadio>
+
 			<h:outputText value="Date of birth" />
 			<p:calendar value="#{inscriptionBean.passenger.birthDay}"
 				pattern="MM/dd/yyyy" />

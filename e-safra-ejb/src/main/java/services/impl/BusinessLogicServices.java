@@ -514,21 +514,21 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	}
 
 	@Override
-	public Boolean assignSectionToLine(Integer idLine,
-			Map<Section, List<Station>> stationsMap) {
+	public Boolean assignSectionsToLine(Integer idLine,
+			Map<Integer, Integer> map) {
 		Boolean b = false;
 		try {
-			for (Entry<Section, List<Station>> entry : stationsMap.entrySet()) {
+			for (Entry<Integer, Integer> entry : map.entrySet()) {
 
-				Section section = entry.getKey();
-				List<Station> stations = entry.getValue();
+				Integer stationId = entry.getKey();
+				Integer sectionId = entry.getValue();
 
-				for (Station station : stations) {
-					Type type = entityManager.find(Type.class, new TypeId(
-							idLine, station.getId()));
-					type.setSection(section);
-					entityManager.persist(section);
-				}
+				Type type = entityManager.find(Type.class, new TypeId(idLine,
+						stationId));
+
+				type.setSection(entityManager.find(Section.class, sectionId));
+
+				entityManager.merge(type);
 			}
 			b = true;
 		} catch (Exception e) {
@@ -542,5 +542,19 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	public Type findTypeByStationAndLine(Station station, Line line) {
 		return entityManager.find(Type.class,
 				new TypeId(line.getId(), station.getId()));
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		String jpql = "select u from User u where u.email=" + "'" + email + "'";
+		User user = new User();
+		try {
+			Query query = entityManager.createQuery(jpql);
+			user = (User) query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		return user;
 	}
 }

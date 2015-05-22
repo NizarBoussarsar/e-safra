@@ -7,10 +7,10 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 import services.interfaces.local.BusinessLogicServicesLocal;
-import domain.Bus;
+import domain.Section;
 
-@FacesConverter("busConverter")
-public class BusConverter implements Converter {
+@FacesConverter("sectionConverter")
+public class SectionConverter implements Converter {
 
 	@Inject
 	BusinessLogicServicesLocal businessLogicServicesLocal;
@@ -19,11 +19,12 @@ public class BusConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 
-		Bus bus = null;
+		Section section = null;
 		if (!value.trim().equals("")) {
-			bus = businessLogicServicesLocal.findBusByNumber(value);
+			section = businessLogicServicesLocal.findSectionByRank(Integer
+					.parseInt(value));
 		}
-		return bus;
+		return section;
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class BusConverter implements Converter {
 		if (object == null || object.equals("")) {
 			eqString = "";
 		} else {
-			eqString = ((Bus) object).getNumber();
+			eqString = ((Section) object).getRank().toString();
 		}
 		return eqString;
 	}

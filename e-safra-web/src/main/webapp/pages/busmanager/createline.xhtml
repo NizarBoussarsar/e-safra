@@ -3,25 +3,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/template/template.xhtml">
+
 	<ui:define name="pageTitle">E-Safra : Bus Manager Create Line</ui:define>
+
 	<ui:define name="page1">
 		<h:link styleClass="auto" outcome="home">
 			<i class="i i-statistics icon"> </i>
 			<span class="font-bold">Home</span>
 		</h:link>
 	</ui:define>
+
 	<ui:define name="page2">
 		<h:link styleClass="auto" outcome="assignbusestoline">
 			<i class="i i-cog2 icon"> </i>
 			<span class="font-bold">Assign buses to Line</span>
 		</h:link>
 	</ui:define>
+
 	<ui:define name="page3">
 		<h:link styleClass="auto" outcome="createline">
 			<i class="i i-docs icon"> </i>
 			<span class="font-bold">Create Line</span>
 		</h:link>
 	</ui:define>
+
 	<ui:define name="page4">
 		<h:link styleClass="auto" outcome="manageBuses">
 			<i class="i i-docs icon"> </i>
@@ -30,7 +35,7 @@
 	</ui:define>
 	<ui:define name="content">
 		<section class="panel panel-default">
-			<header class="panel-heading"> Create line </header>
+			<header class="panel-heading"> Create Line </header>
 			<h:form>
 				<div class="row wrapper">
 					<div class="col-sm-5 m-b-xs">
@@ -42,7 +47,6 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-
 					<h:dataTable styleClass="table table-striped b-t b-light"
 						border="1" value="#{lineBean.stations}" var="station">
 						<h:column id="column1">
@@ -56,7 +60,7 @@
 								<h:outputText value="Select" />
 							</f:facet>
 							<h:commandButton action="#{lineBean.doSelectLineStation}"
-								styleClass="btn btn-s-md btn-primary" value="select">
+								styleClass="btn btn-s-md btn-primary" value="Select">
 								<f:setPropertyActionListener value="#{station}"
 									target="#{lineBean.selectedStation}"></f:setPropertyActionListener>
 							</h:commandButton>
