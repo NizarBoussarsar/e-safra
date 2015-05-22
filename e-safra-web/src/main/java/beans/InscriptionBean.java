@@ -29,7 +29,7 @@ public class InscriptionBean {
 				System.out.println("we will add a user");
 
 				userServicesLocal.addUser(passenger);
-				navigateTo = "/pages/passenger/home?faces-redirect=true";
+				navigateTo = "/login?faces-redirect=true";
 			}
 		} else {
 			ErrorMessage = "The passwords are not matching";

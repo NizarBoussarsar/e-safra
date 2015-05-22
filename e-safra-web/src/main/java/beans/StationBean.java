@@ -1,7 +1,6 @@
 package beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -22,7 +21,6 @@ public class StationBean {
 	private List<Station> stations2 = new ArrayList<>();
 	private Station stationDeparture = new Station();
 	private Station stationArrival = new Station();
-	private Date date1;
 	private List<Bus> buses;
 	private Bus busselected;
 
@@ -51,9 +49,14 @@ public class StationBean {
 
 	public String doSelect() {
 
-		System.out.println(businessLogicServicesLocal.buyTicket(
-				(Passenger) userBean.getUser(), busselected, stationDeparture,
-				stationArrival));
+		Passenger passenger = (Passenger) userBean.getUser();
+		System.out.println("email Passenger" + passenger.getEmail());
+		System.out.println("busselected" + busselected.getNumber());
+		System.out.println("stationDeparture" + stationDeparture.getName());
+		System.out.println("stationArrival" + stationDeparture.getName());
+		System.out.println("BuY Ticket"
+				+ businessLogicServicesLocal.buyTicket(passenger, busselected,
+						stationDeparture, stationArrival));
 
 		return "";
 	}
@@ -112,14 +115,6 @@ public class StationBean {
 
 	public void setStations2(List<Station> stations2) {
 		this.stations2 = stations2;
-	}
-
-	public Date getDate1() {
-		return date1;
-	}
-
-	public void setDate1(Date date1) {
-		this.date1 = date1;
 	}
 
 	public List<Bus> getBuses() {

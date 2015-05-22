@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.UserBean;
 
 @WebFilter("/pages/busmanager/*")
-public class LoginFilter implements Filter {
+public class DriverFilter implements Filter {
 
 	@Override
 	public void destroy() {
@@ -35,7 +35,7 @@ public class LoginFilter implements Filter {
 
 		UserBean userBean = (UserBean) request.getSession().getAttribute(
 				"userBean");
-		if (userBean != null && userBean.getLoggedInAsBusManager() == true) {
+		if (userBean != null && userBean.getLoggedInAsDriver() == true) {
 			filterChain.doFilter(request, response);
 		} else if (request.getRequestURL().toString().contains("login.jsf")) {
 			filterChain.doFilter(request, response);

@@ -19,7 +19,6 @@ public class Ticket implements Serializable {
 	private Long number;
 	private Double price;
 	private Date date;
-	private Integer star;
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,11 +31,10 @@ public class Ticket implements Serializable {
 		super();
 	}
 
-	public Ticket(Long number, Double price, Date date) {
+	public Ticket(Double price) {
 		super();
-		this.number = number;
 		this.price = price;
-		this.date = date;
+		this.date = new Date();
 	}
 
 	@Id
@@ -65,14 +63,6 @@ public class Ticket implements Serializable {
 		this.date = date;
 	}
 
-	public Integer getStar() {
-		return star;
-	}
-
-	public void setStar(Integer star) {
-		this.star = star;
-	}
-
 	@ManyToOne
 	public Passenger getPassenger() {
 		return passenger;
@@ -94,7 +84,7 @@ public class Ticket implements Serializable {
 	@Override
 	public String toString() {
 		return "Ticket [number=" + number + ", price=" + price + ", date="
-				+ date + ", star=" + star + "]";
+				+ date + "]";
 	}
 
 	@Override
