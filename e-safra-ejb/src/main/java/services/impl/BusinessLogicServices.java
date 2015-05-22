@@ -426,28 +426,28 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 		Double price = 0D;
 		switch (sectionNumber) {
 		case 1:
-			price = 320D;
+			price = 0.320D;
 			break;
 		case 2:
-			price = 470D;
+			price = 0.470D;
 			break;
 		case 3:
-			price = 650D;
+			price = 0.650D;
 			break;
 		case 4:
-			price = 800D;
+			price = 0.800D;
 			break;
 		case 5:
-			price = 970D;
+			price = 0.970D;
 			break;
 		case 6:
-			price = 1170D;
+			price = 1.170D;
 			break;
 		case 7:
-			price = 1350D;
+			price = 1.350D;
 			break;
 		case 8:
-			price = 1550D;
+			price = 1.550D;
 			break;
 		default:
 			break;
@@ -460,22 +460,16 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			Station stationDeparture, Station stationArrival) {
 		Boolean b = false;
 		try {
-			// entityManager.merge(passenger);
-			// entityManager.merge(bus);
-			// entityManager.merge(stationDeparture);
-			// entityManager.merge(stationArrival);
-
 			if (passenger != null && bus != null && stationDeparture != null
 					&& stationArrival != null) {
 
 				Type typeDeparture = entityManager.find(Type.class, new TypeId(
-						bus.getLine().getId(), stationArrival.getId()));
+						bus.getLine().getId(), stationDeparture.getId()));
 				Type typeArrival = entityManager.find(Type.class, new TypeId(
 						bus.getLine().getId(), stationArrival.getId()));
 				Integer sectionNumber = (typeArrival.getSection().getRank() - typeDeparture
 						.getSection().getRank()) + 1;
 				Double price = getPriceBySectionNumber(sectionNumber);
-				System.out.println("Price " + price);
 				if (passenger.getCash() > price) {
 
 					passenger.setCash(passenger.getCash() - price);
@@ -486,7 +480,6 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 					// Stop stop = entityManager.find(Stop.class,
 					// new StopId(bus.getId(), stationDeparture.getId()));
 					// stop.setNbFreeSpaces(stop.getNbFreeSpaces() - 1);
-
 					// entityManager.merge(stop);
 					entityManager.merge(passenger);
 					entityManager.persist(ticket);
