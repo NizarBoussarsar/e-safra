@@ -65,15 +65,18 @@ public class UserBean {
 			user = userFound;
 			if (userFound instanceof Passenger) {
 				navigateTo = "/pages/passenger/home?faces-redirect=true";
+				loggedInAsPassenger = true;
 			} else if (userFound instanceof BusManager) {
 				loggedInAsBusManager = true;
 				navigateTo = "/pages/busmanager/home?faces-redirect=true";
 			} else if (userFound instanceof Driver) {
+				loggedInAsDriver = true;
 				navigateTo = "/pages/driver/home?faces-redirect=true";
 			}
 		} else {
 			navigateTo = "/pages/public/404?faces-redirect=true";
 		}
+		System.out.println("navigate=" + navigateTo);
 		return navigateTo;
 	}
 

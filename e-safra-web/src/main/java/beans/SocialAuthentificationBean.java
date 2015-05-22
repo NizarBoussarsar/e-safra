@@ -65,7 +65,10 @@ public class SocialAuthentificationBean implements Serializable {
 			if (this.manager != null) {
 				AuthProvider provider = manager.connect(map);
 				this.profile = provider.getUserProfile();
-
+				this.profile.getValidatedId();
+				
+				///this.profile.getProviderId();
+				
 				// // Do what you want with the data (e.g. persist to the
 				// database,
 				// // etc.)

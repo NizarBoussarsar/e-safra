@@ -41,6 +41,7 @@ public class BusManFilter implements Filter {
 			filterChain.doFilter(request, response);
 
 		} else {
+			
 			response.sendRedirect(request.getContextPath() + "/login.jsf");
 		}
 

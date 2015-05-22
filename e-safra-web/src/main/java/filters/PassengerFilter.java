@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.UserBean;
 
-@WebFilter("/pages/busmanager/*")
+@WebFilter("/pages/passenger/*")
 public class PassengerFilter implements Filter {
 
 	@Override
