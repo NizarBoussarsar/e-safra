@@ -456,6 +456,18 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 	}
 
 	@Override
+	public Integer getSectionNumber(Bus bus, Station stationDeparture,
+			Station stationArrival) {
+		Type typeDeparture = entityManager.find(Type.class, new TypeId(bus
+				.getLine().getId(), stationDeparture.getId()));
+		Type typeArrival = entityManager.find(Type.class, new TypeId(bus
+				.getLine().getId(), stationArrival.getId()));
+		Integer sectionNumber = (typeArrival.getSection().getRank() - typeDeparture
+				.getSection().getRank()) + 1;
+		return sectionNumber;
+	}
+
+	@Override
 	public synchronized Ticket buyTicket(Passenger passenger, Bus bus,
 			Station stationDeparture, Station stationArrival) {
 
@@ -464,12 +476,8 @@ public class BusinessLogicServices implements BusinessLogicServicesRemote,
 			if (passenger != null && bus != null && stationDeparture != null
 					&& stationArrival != null) {
 
-				Type typeDeparture = entityManager.find(Type.class, new TypeId(
-						bus.getLine().getId(), stationDeparture.getId()));
-				Type typeArrival = entityManager.find(Type.class, new TypeId(
-						bus.getLine().getId(), stationArrival.getId()));
-				Integer sectionNumber = (typeArrival.getSection().getRank() - typeDeparture
-						.getSection().getRank()) + 1;
+				Integer sectionNumber = getSectionNumber(bus, stationDeparture,
+						stationArrival);
 				Double price = getPriceBySectionNumber(sectionNumber);
 				if (passenger.getCash() > price) {
 
