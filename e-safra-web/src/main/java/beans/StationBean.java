@@ -44,6 +44,7 @@ public class StationBean {
 	Station station = new Station();
 
 	public String doSome() {
+
 		return "";
 	}
 
