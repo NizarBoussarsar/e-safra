@@ -23,6 +23,8 @@ public class UserBean {
 	private User user = new User();
 	private Passenger passenger = new Passenger();
 	private Boolean loggedInAsBusManager = false;
+	private String type;
+
 	private Boolean loggedInAsPassenger = false;
 	private Boolean loggedInAsDriver = false;
 	private Boolean visibility = false;
@@ -66,11 +68,16 @@ public class UserBean {
 			if (userFound instanceof Passenger) {
 				navigateTo = "/pages/passenger/home?faces-redirect=true";
 				loggedInAsPassenger = true;
+				type = "Passenger";
 			} else if (userFound instanceof BusManager) {
 				loggedInAsBusManager = true;
+				type = "Bus Manager";
+
 				navigateTo = "/pages/busmanager/home?faces-redirect=true";
 			} else if (userFound instanceof Driver) {
 				loggedInAsDriver = true;
+				type = "Driver";
+
 				navigateTo = "/pages/driver/home?faces-redirect=true";
 			}
 		} else {
@@ -87,7 +94,7 @@ public class UserBean {
 
 			externalContext.invalidateSession();
 
-			String homeURL = "http://localhost:8483/esafra-local/pages/public/index.jsf";
+			String homeURL = "http://localhost:8483/e-safra-web/login.jsf";
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect(homeURL);
 		} catch (IOException e) {
@@ -161,6 +168,14 @@ public class UserBean {
 
 	public void setPassenger(Passenger passenger) {
 		this.passenger = passenger;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

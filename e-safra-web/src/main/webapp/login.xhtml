@@ -2,20 +2,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/loginTemplate.xhtml">
 	<ui:define name="pageTitle">E-Safra : Login</ui:define>
+	<ui:define name="title">
+		<strong>Login</strong>
+	</ui:define>
+
 	<ui:define name="username">
-		<h:inputText styleClass="form-control no-border" id="username"
-			value="#{userBean.user.email}" />
-	</ui:define>
-	<ui:define name="password">
-		<h:inputSecret styleClass="form-control no-border" id="password"
-			value="#{userBean.user.password}" />
-	</ui:define>
+		<h:form>
 
-	<ui:define name="submit">
-		<h:commandButton styleClass="btn btn-lg btn-primary btn-block"
-			action="#{userBean.doLogin}" value="Login" />
-	</ui:define>
+			<div class="list-group-item">
+				<p:inputText styleClass="form-control no-border" name="username"
+					placeholder="User Name" id="username" type="text placeholder"
+					value="#{userBean.user.email}" />
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<p:password styleClass="form-control no-border" name="password"
+						placeholder="Password" id="password" type="text placeholder"
+						value="#{userBean.user.password}" />
+				</div>
+			</div>
 
+			<h:commandLink action="#{userBean.doLogin()}"
+				styleClass="btn btn-block btn-social btn-twitter">
+				<i class="fa fa-sign-in"></i> Sign in
+		</h:commandLink>
+
+			<h:commandLink action="#{userBean.doLogin()}"
+				styleClass="btn btn-block btn-social btn-facebook">
+				<i class="fa fa-facebook"></i> Sign in with Facebook
+		</h:commandLink>
+		</h:form>
+	</ui:define>
+	<ui:define name="inscription">
+		<p class="text-muted text-center">
+			<small>Do not have an account?</small>
+		</p>
+		<h:outputLink value="inscription.jsf"
+			styleClass="btn  btn-social btn-block btn-github">
+			<i class="fa fa-user"></i> Create an Account
+</h:outputLink>
+	</ui:define>
 </ui:composition>

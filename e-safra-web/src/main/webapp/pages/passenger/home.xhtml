@@ -1,3 +1,4 @@
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -8,8 +9,9 @@
 	<ui:define name="content">
 		<h1>Passenger Home Page</h1>
 		<h:form>
-			<label>Please select your travel:</label>
+			<h4>Please select your travel:</h4>
 			<br />
+<<<<<<< HEAD
 			<h:panelGrid columns="2">
 				<h:outputText value="Destination :" />
 				<h:selectOneMenu value="#{stationBean.stationDeparture}"
@@ -26,6 +28,19 @@
 						itemValue="#{st}" itemLabel="#{st.name}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
+=======
+			<h:selectOneMenu value="#{stationBean.stationDeparture}"
+				converter="stationConverter">
+				<f:selectItems value="#{stationBean.stations}" var="sta"
+					itemValue="#{sta}" itemLabel="#{sta.name}" />
+			</h:selectOneMenu>
+Destination :
+		<h:selectOneMenu value="#{stationBean.stationArrival}"
+				converter="stationConverter">
+				<f:selectItems value="#{stationBean.stations2}" var="st"
+					itemValue="#{st}" itemLabel="#{st.name}" />
+			</h:selectOneMenu>
+>>>>>>> refs/remotes/origin/master
 			<br />
 			<h:commandButton styleClass="btn btn-s-md btn-primary" value="submit"
 				action="#{stationBean.doSearchBus}" />
@@ -50,6 +65,10 @@
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
+
+
+			<h:commandButton action="#{stationBean.doSome()}" value="TICKET">
+			</h:commandButton>
 		</h:form>
 	</ui:define>
 </ui:composition>

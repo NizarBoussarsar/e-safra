@@ -32,31 +32,31 @@ var map;
 ///////////////////
 
 function initialize() {
-	var myLatlng = new google.maps.LatLng(#{mapBean.myLat}, #{mapBean.myLan});
-	var mapOptions = {
-		zoom : 11,
-		center : myLatlng
-	};
+        var myLatlng = new google.maps.LatLng(#{mapBean.myLat}, #{mapBean.myLan});
+        var mapOptions = {
+                zoom : 11,
+                center : myLatlng
+        };
 
-	var map = new google.maps.Map(document.getElementById("googleMap"),
-			mapOptions);
+        var map = new google.maps.Map(document.getElementById("googleMap"),
+                        mapOptions);
 
-	directionsDisplay = new google.maps.DirectionsRenderer({
-		polylineOptions : {
-			strokeColor : "red",
-			strokeWeight : 7
-		},
-		suppressMarkers : true
-	});
-	
-	var transitLayer = new google.maps.TransitLayer();
-	directionsDisplay.setMap(map);
-	transitLayer.setMap(map);
-	var image = "./images/pin56.png";
-	var user = "./images/user.png";
-	var startm = "./images/start_marker.png";
-	var endm = "./images/end_marker.png";
-	
+        directionsDisplay = new google.maps.DirectionsRenderer({
+                polylineOptions : {
+                        strokeColor : "red",
+                        strokeWeight : 7
+                },
+                suppressMarkers : true
+        });
+        
+        var transitLayer = new google.maps.TransitLayer();
+        directionsDisplay.setMap(map);
+        transitLayer.setMap(map);
+        var image = "./images/pin56.png";
+        var user = "./images/user.png";
+        var startm = "./images/start_marker.png";
+        var endm = "./images/end_marker.png";
+        
 ////////////
 #{mapBean.startStationDeclare}
 ///////////////////
@@ -68,20 +68,20 @@ var waypts = [];
 ///////////////////
 
 
-	var request = {
-		origin : #{mapBean.firstStation},
-		destination : #{mapBean.lastStation},
-		waypoints : waypts,
-		optimizeWaypoints : true,
-		travelMode : google.maps.TravelMode.DRIVING
-	};
+        var request = {
+                origin : #{mapBean.firstStation},
+                destination : #{mapBean.lastStation},
+                waypoints : waypts,
+                optimizeWaypoints : true,
+                travelMode : google.maps.TravelMode.DRIVING
+        };
 
-	directionsService.route(request, function(response, status) {
-		if (status == google.maps.DirectionsStatus.OK) {
-			directionsDisplay.setDirections(response);
+        directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
 
-		}
-	});
+                }
+        });
 }
 
             function calculateDistances() {
@@ -121,22 +121,22 @@ google.maps.event.addDomListener(window, 'load', initialize);
             calculateDistances();
 
 /* ]]> */
-		
-		
-		</h:outputScript>
+                
+                
+                </h:outputScript>
 	</h:head>
 
 	<h:body onload="initialize()">
 
 		<section class="vbox">
 			<header
-				class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+				class="bg-black header header-md navbar navbar-fixed-top-xs box-shadow">
 				<div class="navbar-header aside-md dk">
 					<a class="btn btn-link visible-xs"
 						data-toggle="class:nav-off-screen" data-target="#nav"> <i
 						class="fa fa-bars"></i>
 					</a> <a href="index.html" class="navbar-brand"> <h:graphicImage
-							library="images" name="logo.png" alt="Esprit" styleClass="m-r-sm" />
+							library="images" name="bus.png" alt="Esprit" styleClass="m-r-sm" />
 						<span class="hidden-nav-xs">E-safra</span>
 					</a> <a class="btn btn-link visible-xs" data-toggle="dropdown"
 						data-target=".user"> <i class="fa fa-cog"></i>
@@ -165,32 +165,45 @@ google.maps.event.addDomListener(window, 'load', initialize);
 								</h:form></li>
 						</ul></li>
 				</ul>
+				<ul class="nav navbar-nav hidden-xs">
+					<li class="dropdown"><h:link outcome="home">
+							<i>Home</i>
+						</h:link></li>
+					<li class="dropdown"><h:link outcome="map">
+							<i>Map</i>
+						</h:link></li>
+
+
+				</ul>
 			</header>
 
-			<h1>MAP</h1>
-			<div>
-				<h4 style="margin-left: 30px;" id="timeEstimated">Estimated
-					trip time:</h4>
-			</div>
 
-			<div
-				style="margin-left: 10px; width: 20%; float: left; position: relative;">
+			<BR />
+			<div style="margin-left: 10px; float: left; position: relative;">
 				<h:form>
-					<h:dataTable border="0" value="#{mapBean.lines}" var="l">
+					<h:dataTable style="margin-left:27%" border="0"
+						value="#{mapBean.lines}" var="l">
 						<h:column id="column1">
 							<f:facet name="header">
-								<h:outputText value="Select Line" />
-							</f:facet>
+								<h:outputText style="padding-left:26%;" value="Select Line : " />
 
-							<b><h:commandLink action="#{mapBean.doSelectLine()}"
-									value="#{l.name}">
+							</f:facet>
+							<BR />
+							<b><h:commandLink
+									styleClass="btn btn-block btn-social btn-default"
+									action="#{mapBean.doSelectLine()}" value="#{l.name}">
 									<f:setPropertyActionListener value="#{l}"
 										target="#{mapBean.line}"></f:setPropertyActionListener>
 								</h:commandLink></b>
 
+
 						</h:column>
 
 					</h:dataTable>
+					<div>
+						<h3 style="margin-left: 0px;" id="timeEstimated">Estimated
+							trip time:</h3>
+					</div>
 				</h:form>
 			</div>
 
@@ -201,9 +214,22 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				style="width: 70%; height: 70%; float: right; position: relative;"></div>
 			<div style="clear: both; clear: none;"></div>
 
-			<footer style="min-height: 450px"
-				class="footer hidden-xs no-padder text-center-nav-xs"></footer>
+
 		</section>
+
+		<!-- start: JavaScript-->
+		<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+		<!-- Bootstrap -->
+
+		<h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+		<!-- App -->
+
+		<h:outputScript library="js" name="app.js"></h:outputScript>
+		<h:outputScript library="js/slimscroll"
+			name="jquery.slimscroll.min.js"></h:outputScript>
+		<h:outputScript library="js" name="modernizr.js"></h:outputScript>
+		<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+		<h:outputScript library="js" name="app.plugin.js"></h:outputScript>
 
 
 		<!-- end: JavaScript-->

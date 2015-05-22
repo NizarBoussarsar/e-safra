@@ -1,53 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/loginTemplate.xhtml">
+	<ui:define name="pageTitle">E-Safra : Sign Up</ui:define>
+	<ui:define name="title">
+		<strong>Sign Up</strong>
+	</ui:define>
+	<ui:define name="register">
+		<h:form>
+			<div class="list-group">
+				<div class="list-group-item">
+					<p:inputText styleClass="form-control no-border" name="email"
+						placeholder="Email Address" id="email" type="text placeholder"
+						value="#{inscriptionBean.passenger.email}" required="true">
+						<f:validator validatorId="validator.EmailValidator" />
+					</p:inputText>
+					<p:message for="email" style="color:red" />
+				</div>
+				<div class="list-group-item">
+					<h:outputText value="Gender" />
+					<h:selectOneRadio value="#{inscriptionBean.passenger.gender}">
+						<f:selectItem itemValue="M" itemLabel="Male" />
+						<f:selectItem itemValue="F" itemLabel="Female" />
+					</h:selectOneRadio>
 
-<h:head></h:head>
-<body>
-	<h:form>
-		<h:panelGrid column="2">
-			<h:outputText value="Email" />
-			<h:inputText id="email" value="#{inscriptionBean.passenger.email}"
-				required="true">
-				<f:validator validatorId="validator.EmailValidator" />
-			</h:inputText>
-			<h:message for="email" style="color:red" />
+					<h:outputText value="Date of birth" />
+					<p:calendar value="#{inscriptionBean.passenger.birthDay}"
+						pattern="MM/dd/yyyy" />
+					=======
+					<p:inputText styleClass="form-control no-border" name="firstname"
+						placeholder="First Name" id="FirstName" type="text placeholder"
+						value="#{inscriptionBean.passenger.firstName}" />
+					>>>>>>> refs/remotes/origin/master
 
-			<h:outputText value="First Name" />
-			<h:inputText value="#{inscriptionBean.passenger.firstName}" />
+				</div>
+				<div class="list-group-item">
 
-			<h:outputText value="Last Name" />
-			<h:inputText value="#{inscriptionBean.passenger.lastName}" />
+					<p:inputText styleClass="form-control no-border" name="lastname"
+						placeholder="Last Name" id="LastName" type="text placeholder"
+						value="#{inscriptionBean.passenger.lastName}" />
+				</div>
+				<div class="list-group-item">
 
-			<h:outputText value="Gender" />
-			<h:selectOneRadio value="#{inscriptionBean.passenger.gender}">
-				<f:selectItem itemValue="M" itemLabel="Male" />
-				<f:selectItem itemValue="F" itemLabel="Female" />
-			</h:selectOneRadio>
+					<h:selectOneRadio value="#{inscriptionBean.passenger.gender}">
+						<f:selectItem itemValue="M" itemLabel="Male" />
+						<f:selectItem itemValue="F" itemLabel="Female" />
+					</h:selectOneRadio>
 
-			<h:outputText value="Date of birth" />
-			<p:calendar value="#{inscriptionBean.passenger.birthDay}"
-				pattern="MM/dd/yyyy" />
 
-			<h:outputText value="Password" />
-			<h:inputSecret id="password"
-				value="#{inscriptionBean.passenger.password}" required="true" />
-			<h:message for="password" style="color:red" />
+				</div>
+				<div class="list-group-item">
 
-			<h:outputText value="Confirm Password" />
-			<h:inputSecret id="confirmPassword"
-				value="#{inscriptionBean.confirmPassword}" required="true" />
-			<h:message for="confirmPassword" style="color:red" />
+					<p:calendar styleClass="form-control no-border"
+						placeholder="Date of Birth(mm/dd/yyyy)" id="DateOfBirth"
+						value="#{inscriptionBean.passenger.birthDay}" pattern="MM/dd/yyyy" />
+				</div>
+				<div class="list-group-item">
 
-			<h:commandButton action="#{inscriptionBean.doInscription}"
-				value="Login" />
-			<h:panelGrid rendered="#{inscriptionBean.visibility}">
-				<h:outputText value="#{inscriptionBean.errorMessage}" />
-			</h:panelGrid>
-		</h:panelGrid>
-	</h:form>
-</body>
-</html>
+					<p:password styleClass="form-control no-border" name="password"
+						placeholder="Password" id="password" type="text placeholder"
+						required="true" value="#{inscriptionBean.passenger.password}" />
+
+					<p:message for="password" style="color:red" />
+				</div>
+				<div class="list-group-item">
+
+
+					<p:password styleClass="form-control no-border"
+						name="confirmpassword" placeholder="Confirm Password"
+						id="confirmpassword" type="text placeholder" required="true"
+						value="#{inscriptionBean.confirmPassword}" />
+					<p:message for="confirmpassword" style="color:red" />
+				</div>
+
+				<h:panelGrid rendered="#{inscriptionBean.visibility}">
+					<h:outputText value="#{inscriptionBean.errorMessage}" />
+				</h:panelGrid>
+			</div>
+
+			<h:commandLink action="#{inscriptionBean.doInscription}"
+				styleClass="btn btn-block btn-social btn-google">
+				<i class="fa fa-sign-in"></i> Sign up
+		</h:commandLink>
+			<h:outputLink value="login.jsf"
+				styleClass="btn  btn-social btn-block btn-twitter">
+				<i class="fa fa-sign-out"></i> Sign in</h:outputLink>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
