@@ -25,17 +25,7 @@
 						itemValue="#{st}" itemLabel="#{st.name}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
-			<h:selectOneMenu value="#{stationBean.stationDeparture}"
-				converter="stationConverter">
-				<f:selectItems value="#{stationBean.stations}" var="sta"
-					itemValue="#{sta}" itemLabel="#{sta.name}" />
-			</h:selectOneMenu>
-To :
-		<h:selectOneMenu value="#{stationBean.stationArrival}"
-				converter="stationConverter">
-				<f:selectItems value="#{stationBean.stations2}" var="st"
-					itemValue="#{st}" itemLabel="#{st.name}" />
-			</h:selectOneMenu>
+
 
 
 			<h:commandButton style="vertical-align:baseline;margin-left:21px"
