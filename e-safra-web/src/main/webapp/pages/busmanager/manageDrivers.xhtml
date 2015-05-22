@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/template/template.xhtml">
-	<ui:define name="pageTitle">E-Safra : Buses Management</ui:define>
+	<ui:define name="pageTitle">E-Safra : Stations Management</ui:define>
 	<ui:define name="page1">
 		<h:link styleClass="auto" outcome="home">
 			<i class="i i-statistics icon"> </i>
@@ -28,28 +28,21 @@
 			<span class="font-bold">Manage Buses</span>
 		</h:link>
 	</ui:define>
-	<ui:define name="page5">
-		<h:link styleClass="auto" outcome="manageStations">
-			<i class="i i-docs icon"> </i>
-			<span class="font-bold">Manage Stations</span>
-		</h:link>
-	</ui:define>
-
 	<ui:define name="content">
 		<h:form>
-			<header class="panel-heading"> Manage Buses </header>
-			<div class="table-responsive" style="width: 20%">
+			<header class="panel-heading"> Manage Stations </header>
+			<div class="table-responsive">
 				<h:dataTable styleClass="table table-striped b-t b-light"
 					value="#{busBean.buses}" var="b" border="2">
 					<h:column id="column1">
 						<f:facet name="header">
-							<h:outputText value="Bus Number" />
+							<h:outputText value="number" />
 						</f:facet>
 						<h:outputText value="#{b.number}" />
 					</h:column>
 					<h:column id="column2">
 						<f:facet name="header">
-							<h:outputText value="Action" />
+							<h:outputText value="#{b.number}" />
 						</f:facet>
 						<h:commandButton styleClass="btn btn-s-md btn-primary"
 							action="#{busBean.doSelect}" value="select">

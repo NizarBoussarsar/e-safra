@@ -4,34 +4,38 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
-import beans.LineBean;
-import domain.Line;
+import services.interfaces.local.BusinessLogicServicesLocal;
+import domain.User;
 
 @FacesConverter("userConverter")
 public class UserConverter implements Converter {
 
+	@Inject
+	BusinessLogicServicesLocal businessLogicServicesLocal;
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
-		if (value == null) {
-			return null;
+
+		User user = null;
+		if (!value.trim().equals("")) {
+			user = businessLogicServicesLocal.findUserByEmail(value);
 		}
-		LineBean lineBean = context.getApplication().evaluateExpressionGet(
-				context, "#{userBean}", LineBean.class);
-		Line line = lineBean.doFindLineByName(value);
-		System.out.println(line);
-		return line;
+		return user;
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
 			Object object) {
-		String string = null;
-		if (object instanceof Line) {
-			string = ((Line) object).getName();
+		String eqString = null;
+		if (object == null || object.equals("")) {
+			eqString = "";
+		} else {
+			eqString = ((User) object).getEmail();
 		}
-		return string;
+		return eqString;
 	}
 
 }

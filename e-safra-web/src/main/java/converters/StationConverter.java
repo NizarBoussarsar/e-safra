@@ -4,34 +4,38 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
-import beans.StationBean;
+import services.interfaces.local.BusinessLogicServicesLocal;
 import domain.Station;
 
 @FacesConverter("stationConverter")
 public class StationConverter implements Converter {
 
+	@Inject
+	BusinessLogicServicesLocal businessLogicServicesLocal;
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
-		if (value == null) {
-			return null;
+
+		Station station = null;
+		if (!value.trim().equals("")) {
+			station = businessLogicServicesLocal.findStationByName(value);
 		}
-		StationBean stationBean = context.getApplication()
-				.evaluateExpressionGet(context, "#{stationBean}",
-						StationBean.class);
-		Station station = stationBean.doFindStationByName(value);
 		return station;
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
 			Object object) {
-		String string = null;
-		if (object instanceof Station) {
-			string = ((Station) object).getName();
+		String eqString = null;
+		if (object == null || object.equals("")) {
+			eqString = "";
+		} else {
+			eqString = ((Station) object).getName();
 		}
-		return string;
+		return eqString;
 	}
 
 }
