@@ -25,8 +25,18 @@
 						itemValue="#{st}" itemLabel="#{st.name}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
+			<h:selectOneMenu value="#{stationBean.stationDeparture}"
+				converter="stationConverter">
+				<f:selectItems value="#{stationBean.stations}" var="sta"
+					itemValue="#{sta}" itemLabel="#{sta.name}" />
+			</h:selectOneMenu>
+To :
+		<h:selectOneMenu value="#{stationBean.stationArrival}"
+				converter="stationConverter">
+				<f:selectItems value="#{stationBean.stations2}" var="st"
+					itemValue="#{st}" itemLabel="#{st.name}" />
+			</h:selectOneMenu>
 
-			<br />
 
 			<h:commandButton style="vertical-align:baseline;margin-left:21px"
 				styleClass="btn btn-s-md btn-success" value="Search"
@@ -39,13 +49,13 @@
 					value="#{stationBean.buses}" var="b" border="2">
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Bus number" />
+							<h:outputText value="number" />
 						</f:facet>
 						<h:outputText value="#{b.number}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Action" />
+							<h:outputText value="#{b.number}" />
 						</f:facet>
 						<h:commandButton styleClass="btn btn-s-md btn-primary"
 							action="#{stationBean.doSelect}" value="Select">
@@ -54,6 +64,9 @@
 						</h:commandButton>
 					</h:column>
 				</h:dataTable>
+
+				<h:commandButton action="#{stationBean.doSome()}" value="TICKET">
+				</h:commandButton>
 			</div>
 		</h:form>
 	</ui:define>

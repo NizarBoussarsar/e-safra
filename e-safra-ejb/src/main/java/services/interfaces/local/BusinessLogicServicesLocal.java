@@ -66,9 +66,6 @@ public interface BusinessLogicServicesLocal {
 
 	Section findSectionByRank(Integer rank);
 
-	Integer getSectionNumber(Bus bus, Station stationDeparture,
-			Station stationArrival);
-
 	Ticket buyTicket(Passenger passenger, Bus bus, Station stationDeparture,
 			Station stationArrival);
 

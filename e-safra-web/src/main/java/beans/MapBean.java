@@ -45,7 +45,10 @@ public class MapBean {
 	}
 
 	public String doSelectLine() {
+
+		System.out.println("IM INNNNNNNN !");
 		selectedId = line.getId();
+		System.out.println("LINE ID " + selectedId);
 		Init();
 		return "";
 	}

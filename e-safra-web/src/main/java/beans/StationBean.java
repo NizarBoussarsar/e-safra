@@ -27,9 +27,15 @@ public class StationBean {
 	private Bus busselected;
 	private Station station = new Station();
 	private Ticket ticket;
-	private Passenger passenger;
+	Passenger passenger;
 
-	private Integer sectionNumber = 0;
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+	}
 
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
@@ -40,10 +46,18 @@ public class StationBean {
 	@ManagedProperty("#{userBean}")
 	private UserBean userBean;
 
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
 	public String doSaveOrUpdate() {
 		stationServicesLocal.updateStation(station);
 		visibility = false;
 		return "";
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 	public String doSelectInCrud() {
@@ -52,9 +66,14 @@ public class StationBean {
 	}
 
 	public String doSelect() {
-		sectionNumber = businessLogicServicesLocal.getSectionNumber(
-				busselected, stationDeparture, stationArrival);
-		System.out.println("nb " + sectionNumber);
+
+		passenger = (Passenger) userBean.getUser();
+
+		System.out.println("email Passenger" + passenger.getEmail());
+		System.out.println("busselected" + busselected.getNumber());
+		System.out.println("stationDeparture" + stationDeparture.getName());
+		System.out.println("stationArrival" + stationDeparture.getName());
+
 		ticket = businessLogicServicesLocal.buyTicket(passenger, busselected,
 				stationDeparture, stationArrival);
 		if (ticket != null) {
@@ -64,9 +83,13 @@ public class StationBean {
 	}
 
 	public String doSearchBus() {
+
 		buses = businessLogicServicesLocal.findComingSoonBusesGoingToStation(
 				stationDeparture.getName(), stationArrival.getName());
+		System.out.println("size : " + buses.size());
+
 		return "";
+
 	}
 
 	public Station getStationDeparture() {
@@ -147,27 +170,4 @@ public class StationBean {
 		this.ticket = ticket;
 	}
 
-	public Passenger getPassenger() {
-		return passenger;
-	}
-
-	public void setPassenger(Passenger passenger) {
-		this.passenger = passenger;
-	}
-
-	public Integer getSectionNumber() {
-		return sectionNumber;
-	}
-
-	public void setSectionNumber(Integer sectionNumber) {
-		this.sectionNumber = sectionNumber;
-	}
-
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
 }
