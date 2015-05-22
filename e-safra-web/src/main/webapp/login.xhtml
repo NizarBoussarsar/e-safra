@@ -10,24 +10,21 @@
 	</ui:define>
 
 	<ui:define name="username">
-		<div class="list-group-item">
-			<p:inputText styleClass="form-control no-border" name="username"
-				placeholder="User Name" id="username" type="text placeholder"
-				value="#{userBean.user.email}" />
-		</div>
-	</ui:define>
-	<ui:define name="password">
-		<div class="list-group">
-			<div class="list-group-item">
-				<p:password styleClass="form-control no-border" name="password"
-					placeholder="Password" id="password" type="text placeholder"
-					value="#{userBean.user.password}" />
-			</div>
-		</div>
-	</ui:define>
-
-	<ui:define name="submit">
 		<h:form>
+
+			<div class="list-group-item">
+				<p:inputText styleClass="form-control no-border" name="username"
+					placeholder="User Name" id="username" type="text placeholder"
+					value="#{userBean.user.email}" />
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<p:password styleClass="form-control no-border" name="password"
+						placeholder="Password" id="password" type="text placeholder"
+						value="#{userBean.user.password}" />
+				</div>
+			</div>
+
 			<h:commandLink action="#{userBean.doLogin()}"
 				styleClass="btn btn-block btn-social btn-twitter">
 				<i class="fa fa-sign-in"></i> Sign in

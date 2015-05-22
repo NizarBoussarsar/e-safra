@@ -34,7 +34,7 @@
 			<header class="panel-heading"> Assign buses to line </header>
 			<h:form>
 				<div class="row wrapper">
-					<div class="col-sm-5 m-b-xs">
+					<div class="col-sm-5 m-b-xs" style="width: 20%">
 						<h:selectOneMenu style="width:166px"
 							styleClass="input-sm form-control input-s-sm inline v-middle"
 							value="#{lineBean.line}" converter="lineConverter">
@@ -44,7 +44,7 @@
 						</h:selectOneMenu>
 					</div>
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive" style="width: 20%">
 					<h:dataTable styleClass="table table-striped b-t b-light"
 						border="1" value="#{lineBean.buses}" var="bus">
 						<h:column id="column1">
