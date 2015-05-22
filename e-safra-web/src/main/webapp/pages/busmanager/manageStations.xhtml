@@ -28,25 +28,32 @@
 			<span class="font-bold">Manage Buses</span>
 		</h:link>
 	</ui:define>
+	<ui:define name="page5">
+		<h:link styleClass="auto" outcome="manageStations">
+			<i class="i i-docs icon"> </i>
+			<span class="font-bold">Manage Stations</span>
+		</h:link>
+	</ui:define>
 	<ui:define name="content">
 		<h:form>
 			<header class="panel-heading"> Manage Stations </header>
 			<div class="table-responsive">
 				<h:dataTable styleClass="table table-striped b-t b-light"
-					value="#{busBean.buses}" var="b" border="2">
+					value="#{stationBean.stations}" var="b" border="2">
 					<h:column id="column1">
 						<f:facet name="header">
-							<h:outputText value="number" />
+							<h:outputText value="Name" />
 						</f:facet>
-						<h:outputText value="#{b.number}" />
+						<h:outputText value="#{b.name}" />
 					</h:column>
 					<h:column id="column2">
 						<f:facet name="header">
-							<h:outputText value="#{b.number}" />
+							<h:outputText value="Action" />
 						</f:facet>
 						<h:commandButton styleClass="btn btn-s-md btn-primary"
-							action="#{busBean.doSelect}" value="select">
-							<f:setPropertyActionListener value="#{b}" target="#{busBean.bus}"></f:setPropertyActionListener>
+							action="#{stationBean.doSelectInCrud}" value="select">
+							<f:setPropertyActionListener value="#{b}"
+								target="#{stationBean.station}"></f:setPropertyActionListener>
 						</h:commandButton>
 					</h:column>
 				</h:dataTable>
@@ -55,21 +62,20 @@
 				action="#{busBean.doSelect}" value="add bus" />
 			<div class="row wrapper">
 				<div class="col-sm-5 m-b-xs">
-					<h:panelGrid columns="2" rendered="#{busBean.visibility}">
-						<h:outputText value="num" />
-						<h:inputText style="width:169px" value="#{busBean.bus.number}" />
-						<h:outputText value="line" />
-						<h:inputText style="width:169px" value="#{busBean.bus.line.name}" />
-						<h:outputText value="line to update" />
-						<h:selectOneMenu style="width:169px" value="#{lineBean.line}"
-							converter="lineConverter">
-							<f:selectItems value="#{lineBean.lines}" var="l"
-								itemLabel="#{l.name}" itemValue="#{l}"></f:selectItems>
-						</h:selectOneMenu>
+					<h:panelGrid columns="2" rendered="#{stationBean.visibility}">
+						<h:outputText value="name" />
+						<h:inputText style="width:169px"
+							value="#{stationBean.station.name}" />
+						<h:outputText value="latitude" />
+						<h:inputText style="width:169px"
+							value="#{stationBean.station.latitude}" />
+						<h:outputText value="longitude" />
+						<h:inputText style="width:169px"
+							value="#{stationBean.station.longitude}" />
+
+
 						<h:commandButton styleClass="btn btn-s-md btn-success"
-							action="#{busBean.doSaveOrUpdate}" value="save or update" />
-						<h:commandButton styleClass="btn btn-s-md btn-danger"
-							action="#{busBean.doDeleteBus}" value="delete" />
+							action="#{stationBean.doSaveOrUpdate}" value="save or update" />
 					</h:panelGrid>
 				</div>
 			</div>

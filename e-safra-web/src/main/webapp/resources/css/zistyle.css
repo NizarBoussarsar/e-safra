@@ -1,0 +1,382 @@
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:300);
+
+body {
+	background: #FFF url('../img/bg.png');	
+}
+
+/***** ZI TABS  ****/
+
+.zitabs {margin: 3% auto; width:400px; height:400px; color:#FFFFFF; font-family: 'Merriweather Sans', sans-serif; font-size:10px; }
+.zitabs input[type=radio] {display: none; }
+.zitabs label {transition: all 0.3s ease-in-out; display: inline-block; cursor: pointer; color: #FFFFFF; height: 3em; background: #E52B50; text-align: center; line-height: 3em; font-size:25px; margin-right:-5px; width: 25.35%;}
+
+.zitabs label:last-of-type { border-bottom: none; }
+.zitabs label:hover {background: #555; }
+.zitabs input[type=radio]:checked + label {background: #333;color: #FFFFFF; }
+.zitabs .tab-body {position: absolute;top: -9999px;opacity: 0; padding: 20px;transition: opacity 0.5s ease-in; }
+
+.tab-body-wrapper {background: #333;border-top: #333 5px solid; }
+
+#tab1:checked ~ .tab-body-wrapper #tab-body-1, #tab2:checked ~ .tab-body-wrapper #tab-body-2, #tab3:checked ~ .tab-body-wrapper #tab-body-3, #tab4:checked
+~ .tab-body-wrapper #tab-body-4 { position: relative; top: 0px;opacity: 1; }
+
+
+/* ---------- ZI LOGIN ---------- */
+.clearfix { *zoom: 1; } /* For IE 6/7 */
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: "";
+}
+.clearfix:after { clear: both; }
+
+#login {
+	width: 350px;
+}
+
+input {
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+	padding: 0;
+	-webkit-appearance: none;
+}
+
+#login fieldset {
+	border:none;
+}
+
+#login form span {
+	background-color: #E52B50;
+	border-radius: 3px 0px 0px 3px;
+	-moz-border-radius: 3px 0px 0px 3px;
+	-webkit-border-radius: 3px 0px 0px 3px;
+	color: #FFFFFF;
+	display: block;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 50px;
+	font-size:15px;
+}
+
+#login form input {
+	height: 50px;
+}
+
+#login form input[type="text"], input[type="password"] {
+	background-color: #e6e6e6;
+	border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	color: #606468;
+	margin-bottom: 1em;
+	padding: 0 10px;
+	width: 78.5%;
+}
+
+#login form input[type="submit"] {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: #E52B50;
+	color: #eee;
+	font-weight: bold;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+#login form input[type="submit"]:hover {
+	background-color: #999;
+}
+
+#login form textarea {
+	background-color: #e6e6e6;
+	border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	color: #606468;
+	margin-bottom: 1em;
+	padding: 10px;
+	width: 78.5%;
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;	
+	-webkit-appearance: none;
+	height:100px;
+}
+
+#login > p {
+	text-align: center;
+}
+
+#login > p span {
+	padding-left: 5px;
+}
+
+/****** MESSAGES ****/
+
+.message-info {
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 0;
+  margin-bottom: -8px;  
+  -webkit-animation: zianimation 500ms ease-in reverse;
+  -moz-animation: zianimation 500ms ease-in reverse;
+  -o-animation: zianimation 500ms ease-in reverse;
+  animation: zianimation 500ms ease-in reverse;
+  padding: 4px 16px;  
+  color: #E52B50;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+}
+:focus + .message-info {
+  margin-bottom: 0;
+  height: auto;
+  visibility: visible;
+  -webkit-animation: zianimation ease-in 500ms;
+  -moz-animation: zianimation ease-in 500ms;
+  -o-animation: zianimation ease-in 500ms;
+  animation: zianimation ease-in 500ms;
+}
+
+@-webkit-keyframes zianimation {
+  0% {
+    margin-bottom: -8px;
+    visibility: visible;
+    line-height: 0;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, -90deg);
+    -moz-transform: rotate3d(1, 0, 0, -90deg);
+    -ms-transform: rotate3d(1, 0, 0, -90deg);
+    -o-transform: rotate3d(1, 0, 0, -90deg);
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
+
+  33.333% {
+    margin-bottom: 4px;
+    line-height: 16px;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+
+  66.667% {
+    margin-bottom: 2px;
+    -webkit-transform: rotate3d(1, 0, 0, 25deg);
+    -moz-transform: rotate3d(1, 0, 0, 25deg);
+    -ms-transform: rotate3d(1, 0, 0, 25deg);
+    -o-transform: rotate3d(1, 0, 0, 25deg);
+    transform: rotate3d(1, 0, 0, 25deg);
+  }
+
+  100% {
+    margin-bottom: 0;
+    visibility: visible;
+    height: auto;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
+@-moz-keyframes zianimation {
+  0% {
+    margin-bottom: -8px;
+    visibility: visible;
+    line-height: 0;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, -90deg);
+    -moz-transform: rotate3d(1, 0, 0, -90deg);
+    -ms-transform: rotate3d(1, 0, 0, -90deg);
+    -o-transform: rotate3d(1, 0, 0, -90deg);
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
+
+  33.333% {
+    margin-bottom: 4px;
+    line-height: 16px;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+
+  66.667% {
+    margin-bottom: 2px;
+    -webkit-transform: rotate3d(1, 0, 0, 25deg);
+    -moz-transform: rotate3d(1, 0, 0, 25deg);
+    -ms-transform: rotate3d(1, 0, 0, 25deg);
+    -o-transform: rotate3d(1, 0, 0, 25deg);
+    transform: rotate3d(1, 0, 0, 25deg);
+  }
+
+  100% {
+    margin-bottom: 0;
+    visibility: visible;
+    height: auto;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
+@-o-keyframes zianimation {
+  0% {
+    margin-bottom: -8px;
+    visibility: visible;
+    line-height: 0;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, -90deg);
+    -moz-transform: rotate3d(1, 0, 0, -90deg);
+    -ms-transform: rotate3d(1, 0, 0, -90deg);
+    -o-transform: rotate3d(1, 0, 0, -90deg);
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
+
+  33.333% {
+    margin-bottom: 4px;
+    line-height: 16px;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+
+  66.667% {
+    margin-bottom: 2px;
+    -webkit-transform: rotate3d(1, 0, 0, 25deg);
+    -moz-transform: rotate3d(1, 0, 0, 25deg);
+    -ms-transform: rotate3d(1, 0, 0, 25deg);
+    -o-transform: rotate3d(1, 0, 0, 25deg);
+    transform: rotate3d(1, 0, 0, 25deg);
+  }
+
+  100% {
+    margin-bottom: 0;
+    visibility: visible;
+    height: auto;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
+@keyframes zianimation {
+  0% {
+    margin-bottom: -8px;
+    visibility: visible;
+    line-height: 0;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, -90deg);
+    -moz-transform: rotate3d(1, 0, 0, -90deg);
+    -ms-transform: rotate3d(1, 0, 0, -90deg);
+    -o-transform: rotate3d(1, 0, 0, -90deg);
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
+
+  33.333% {
+    margin-bottom: 4px;
+    line-height: 16px;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+
+  66.667% {
+    margin-bottom: 2px;
+    -webkit-transform: rotate3d(1, 0, 0, 25deg);
+    -moz-transform: rotate3d(1, 0, 0, 25deg);
+    -ms-transform: rotate3d(1, 0, 0, 25deg);
+    -o-transform: rotate3d(1, 0, 0, 25deg);
+    transform: rotate3d(1, 0, 0, 25deg);
+  }
+
+  100% {
+    margin-bottom: 0;
+    visibility: visible;
+    height: auto;
+    -webkit-transmessage-origin: 0 0 0;
+    -moz-transmessage-origin: 0 0 0;
+    -ms-transmessage-origin: 0 0 0;
+    -o-transmessage-origin: 0 0 0;
+    transmessage-origin: 0 0 0;
+    -webkit-transform: rotate3d(1, 0, 0, 0deg);
+    -moz-transform: rotate3d(1, 0, 0, 0deg);
+    -ms-transform: rotate3d(1, 0, 0, 0deg);
+    -o-transform: rotate3d(1, 0, 0, 0deg);
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
+/* ---------- ZI TOOLTIPS ---------- */
+
+.tooltip{
+   			display: inline;
+    		position: relative;			
+		}
+		
+		.tooltip:hover:after{
+    		background: #333;
+    		background: rgba(0,0,0,.8);    		 		
+    		color: #fff;
+    		content: attr(title);    		
+    		position: absolute;
+    		z-index: 98;
+    		width: 102px;
+			font-size:15px;
+			left:0px;			
+		}
+		
+		

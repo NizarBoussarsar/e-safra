@@ -33,7 +33,7 @@
 			<header class="panel-heading"> Create line </header>
 			<h:form>
 				<div class="row wrapper">
-					<div class="col-sm-5 m-b-xs">
+					<div class="col-sm-5 m-b-xs" style="width: 20%">
 						<h:panelGrid column="1">
 							<h:outputText value="Line name : " />
 							<h:inputText value="#{lineBean.line.name}" />
@@ -41,7 +41,7 @@
 						<br />
 					</div>
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive" style="width: 20%">
 
 					<h:dataTable styleClass="table table-striped b-t b-light"
 						border="1" value="#{lineBean.stations}" var="station">
