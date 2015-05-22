@@ -19,11 +19,12 @@ import domain.Station;
 public class StationBean {
 	private List<Station> stations = new ArrayList<>();
 	private List<Station> stations2 = new ArrayList<>();
+	private Boolean visibility = false;
 	private Station stationDeparture = new Station();
 	private Station stationArrival = new Station();
 	private List<Bus> buses;
 	private Bus busselected;
-
+	private Station station = new Station();
 	@EJB
 	private BusinessLogicServicesLocal businessLogicServicesLocal;
 
@@ -41,9 +42,12 @@ public class StationBean {
 		this.userBean = userBean;
 	}
 
-	Station station = new Station();
-
 	public String doSome() {
+		return "";
+	}
+
+	public String doSelectInCrud() {
+		visibility = true;
 		return "";
 	}
 
@@ -131,6 +135,14 @@ public class StationBean {
 
 	public void setBusselected(Bus busselected) {
 		this.busselected = busselected;
+	}
+
+	public Boolean getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(Boolean visibility) {
+		this.visibility = visibility;
 	}
 
 }
