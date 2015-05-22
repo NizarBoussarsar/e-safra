@@ -1,4 +1,3 @@
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -7,11 +6,9 @@
 	template="/template/passengerTemplate.xhtml">
 	<ui:define name="pageTitle">E-Safra : Passenger Home</ui:define>
 	<ui:define name="content">
-		<h1>Passenger Home Page</h1>
 		<h:form>
 			<h4>Please select your travel:</h4>
 			<br />
-<<<<<<< HEAD
 			<h:panelGrid columns="2">
 				<h:outputText value="Destination :" />
 				<h:selectOneMenu value="#{stationBean.stationDeparture}"
@@ -28,47 +25,70 @@
 						itemValue="#{st}" itemLabel="#{st.name}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
-=======
 			<h:selectOneMenu value="#{stationBean.stationDeparture}"
 				converter="stationConverter">
 				<f:selectItems value="#{stationBean.stations}" var="sta"
 					itemValue="#{sta}" itemLabel="#{sta.name}" />
 			</h:selectOneMenu>
-Destination :
+To :
 		<h:selectOneMenu value="#{stationBean.stationArrival}"
 				converter="stationConverter">
 				<f:selectItems value="#{stationBean.stations2}" var="st"
 					itemValue="#{st}" itemLabel="#{st.name}" />
 			</h:selectOneMenu>
->>>>>>> refs/remotes/origin/master
-			<br />
-			<h:commandButton styleClass="btn btn-s-md btn-primary" value="submit"
+
+
+			<h:commandButton style="vertical-align:baseline;margin-left:21px"
+				styleClass="btn btn-s-md btn-success" value="Search"
 				action="#{stationBean.doSearchBus}" />
-			<br />
-			<br />
-			<h:dataTable styleClass=" table table-striped b-t b-light"
-				value="#{stationBean.buses}" var="b" border="2">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Bus Number" />
-					</f:facet>
-					<h:outputText value="#{b.number}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Action" />
-					</f:facet>
-					<h:commandButton styleClass="btn btn-s-md btn-primary"
-						action="#{stationBean.doSelect}" value="select">
-						<f:setPropertyActionListener value="#{b}"
-							target="#{stationBean.busselected}"></f:setPropertyActionListener>
-					</h:commandButton>
-				</h:column>
-			</h:dataTable>
 
+			<br />
+			<div class="table-responsive" style="width: 40%; margin-top: 2%">
 
-			<h:commandButton action="#{stationBean.doSome()}" value="TICKET">
-			</h:commandButton>
+				<h:dataTable styleClass="table table-striped b-t b-light"
+					value="#{stationBean.buses}" var="b" border="2">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="number" />
+						</f:facet>
+						<h:outputText value="#{b.number}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{b.number}" />
+						</f:facet>
+						<h:commandButton styleClass="btn btn-s-md btn-primary"
+							action="#{stationBean.doSelect}" value="Select">
+							<f:setPropertyActionListener value="#{b}"
+								target="#{stationBean.busselected}"></f:setPropertyActionListener>
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				<h:commandButton styleClass="btn btn-s-md btn-primary"
+					value="submit" action="#{stationBean.doSearchBus}" />
+				<br /> <br />
+				<h:dataTable styleClass=" table table-striped b-t b-light"
+					value="#{stationBean.buses}" var="b" border="2">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Bus Number" />
+						</f:facet>
+						<h:outputText value="#{b.number}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton styleClass="btn btn-s-md btn-primary"
+							action="#{stationBean.doSelect}" value="select">
+							<f:setPropertyActionListener value="#{b}"
+								target="#{stationBean.busselected}"></f:setPropertyActionListener>
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				<h:commandButton action="#{stationBean.doSome()}" value="TICKET">
+				</h:commandButton>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
